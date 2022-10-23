@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "893951167200",
+    "firebase_url": "https://inzv2-89e6f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "inzv2-89e6f",
+    "storage_bucket": "inzv2-89e6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893951167200:android:6bfca8e312bad23fcf5e85",
+        "android_client_info": {
+          "package_name": "com.example.owocewarzywa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893951167200-ktrh74ir4qpmrp5eceh9l9oi9qmmr2pg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.owocewarzywa",
+            "certificate_hash": "d7a5ff6783be8e8801eaab4fb32db43fc12b38da"
+          }
+        },
+        {
+          "client_id": "893951167200-4hoh7cdc1ki4mjqd96ir2ak4ds42k46j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcrOgz_27nlCnZrLO8BqyEtTuL-eabruM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893951167200-4hoh7cdc1ki4mjqd96ir2ak4ds42k46j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
