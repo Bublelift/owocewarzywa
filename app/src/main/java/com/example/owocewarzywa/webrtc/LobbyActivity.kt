@@ -13,14 +13,15 @@ import com.google.firebase.ktx.Firebase
 class LobbyActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
-    /******JK******/
-    val start_meeting = findViewById<MaterialButton>(R.id.start_meeting)
-    val meeting_id = findViewById<EditText>(R.id.meeting_id)
-    val join_meeting = findViewById<MaterialButton>(R.id.join_meeting)
-    /*****************/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_lobby_layout)
+        /******JK******/
+        val start_meeting = findViewById<MaterialButton>(R.id.start_meeting)
+        val meeting_id = findViewById<EditText>(R.id.meeting_id)
+        val join_meeting = findViewById<MaterialButton>(R.id.join_meeting)
+        /*****************/
         Constants.isInitiatedNow = true
         Constants.isCallEnded = true
         start_meeting.setOnClickListener {

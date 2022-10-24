@@ -28,15 +28,6 @@ class RTCActivity : AppCompatActivity() {
         private const val AUDIO_PERMISSION = Manifest.permission.RECORD_AUDIO
     }
 
-    /******JK******/
-    val video_button = findViewById<ImageView>(R.id.video_button)
-    val mic_button = findViewById<ImageView>(R.id.mic_button)
-    val end_call_button = findViewById<ImageView>(R.id.end_call_button)
-    val local_view = findViewById<SurfaceViewRenderer>(R.id.local_view)
-    val remote_view = findViewById<SurfaceViewRenderer>(R.id.remote_view)
-    val remote_view_loading = findViewById<ProgressBar>(R.id.remote_view_loading)
-    /*****************/
-
     private lateinit var rtcClient: RTCClient
     private lateinit var signallingClient: SignalingClient
 
@@ -63,7 +54,19 @@ class RTCActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.video_chat_layout)
+        //requestCameraAndAudioPermission()
+
+
+        /******JK******/
+        val video_button = findViewById<ImageView>(R.id.video_button)
+        val mic_button = findViewById<ImageView>(R.id.mic_button)
+        val end_call_button = findViewById<ImageView>(R.id.end_call_button)
+        val local_view = findViewById<SurfaceViewRenderer>(R.id.local_view)
+        val remote_view = findViewById<SurfaceViewRenderer>(R.id.remote_view)
+        val remote_view_loading = findViewById<ProgressBar>(R.id.remote_view_loading)
+        /*****************/
 
         if (intent.hasExtra("meetingID"))
             meetingID = intent.getStringExtra("meetingID")!!
@@ -73,8 +76,8 @@ class RTCActivity : AppCompatActivity() {
         checkCameraAndAudioPermission()
         audioManager.selectAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
         //JK start z wyłączonym video
-        video_button.setImageResource(R.drawable.ic_baseline_videocam_off_24)
-        rtcClient.enableVideo(false)
+        //video_button.setImageResource(R.drawable.ic_baseline_videocam_off_24)
+        //rtcClient.enableVideo(false)
 
 //        switch_camera_button.setOnClickListener {
 //            rtcClient.switchCamera()
@@ -144,7 +147,7 @@ class RTCActivity : AppCompatActivity() {
                     override fun onAddStream(p0: MediaStream?) {
                         super.onAddStream(p0)
                         Log.e(TAG, "onAddStream: $p0")
-                        p0?.videoTracks?.get(0)?.addSink(remote_view)
+                        p0?.videoTracks?.get(0)?.addSink(findViewById<SurfaceViewRenderer>(R.id.remote_view))
                     }
 
                     override fun onIceConnectionChange(p0: PeerConnection.IceConnectionState?) {
@@ -177,9 +180,9 @@ class RTCActivity : AppCompatActivity() {
                 }
         )
 
-        rtcClient.initSurfaceView(remote_view)
-        rtcClient.initSurfaceView(local_view)
-        rtcClient.startLocalVideoCapture(local_view)
+        rtcClient.initSurfaceView(findViewById<SurfaceViewRenderer>(R.id.remote_view))
+        rtcClient.initSurfaceView(findViewById<SurfaceViewRenderer>(R.id.local_view))
+        rtcClient.startLocalVideoCapture(findViewById<SurfaceViewRenderer>(R.id.local_view))
         signallingClient =  SignalingClient(meetingID,createSignallingClientListener())
         if (!isJoin)
             rtcClient.call(sdpObserver,meetingID)
@@ -187,20 +190,21 @@ class RTCActivity : AppCompatActivity() {
 
     private fun createSignallingClientListener() = object : SignalingClientListener {
         override fun onConnectionEstablished() {
-            end_call_button.isClickable = true
+            findViewById<ImageView>(R.id.end_call_button).isClickable = true
+//            end_call_button.isClickable = true
         }
 
         override fun onOfferReceived(description: SessionDescription) {
             rtcClient.onRemoteSessionReceived(description)
             Constants.isInitiatedNow = false
             rtcClient.answer(sdpObserver,meetingID)
-            remote_view_loading.isGone = true
+            findViewById<ProgressBar>(R.id.remote_view_loading).isGone = true
         }
 
         override fun onAnswerReceived(description: SessionDescription) {
             rtcClient.onRemoteSessionReceived(description)
             Constants.isInitiatedNow = false
-            remote_view_loading.isGone = true
+            findViewById<ProgressBar>(R.id.remote_view_loading).isGone = true
         }
 
         override fun onIceCandidateReceived(iceCandidate: IceCandidate) {
@@ -218,6 +222,7 @@ class RTCActivity : AppCompatActivity() {
     }
 
     private fun requestCameraAndAudioPermission(dialogShown: Boolean = false) {
+        Log.e("wchodzi", "wchodzi")
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, CAMERA_PERMISSION) &&
             ActivityCompat.shouldShowRequestPermissionRationale(this, AUDIO_PERMISSION) &&
             !dialogShown) {

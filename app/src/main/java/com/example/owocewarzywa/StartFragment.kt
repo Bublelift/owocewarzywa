@@ -15,6 +15,7 @@
  */
 package com.example.owocewarzywa
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -33,18 +34,20 @@ import com.example.owocewarzywa.webrtc.LobbyActivity
  */
 class StartFragment : Fragment() {
 
+
     // Binding object instance corresponding to the fragment_start.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
     private var binding: FragmentStartBinding? = null
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
-    private val sharedViewModel: OrderViewModel by activityViewModels()
+    //private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val fragmentBinding = FragmentStartBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -60,12 +63,12 @@ class StartFragment : Fragment() {
      */
     fun orderCupcake(quantity: Int) {
         // Update the view model with the quantity
-        sharedViewModel.setQuantity(quantity)
-
-        // If no flavor is set in the view model yet, select vanilla as default flavor
-        if (sharedViewModel.hasNoFlavorSet()) {
-            sharedViewModel.setFlavor(getString(R.string.vanilla))
-        }
+//        sharedViewModel.setQuantity(quantity)
+//
+//        // If no flavor is set in the view model yet, select vanilla as default flavor
+//        if (sharedViewModel.hasNoFlavorSet()) {
+//            sharedViewModel.setFlavor(getString(R.string.vanilla))
+//        }
 
         // Navigate to the next destination to select the flavor of the cupcakes
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
@@ -86,5 +89,7 @@ class StartFragment : Fragment() {
             val intent = Intent (it, LobbyActivity::class.java)
             it.startActivity(intent)
         }
+//        val intent = Intent (requ , LobbyActivity::class.java)
+//        startActivity(intent)
     }
 }
