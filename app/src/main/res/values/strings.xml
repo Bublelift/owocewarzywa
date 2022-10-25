@@ -14,13 +14,13 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Cupcake</string>
+    <string name="app_name">PoliBieda Lubelska</string>
     <string name="pref_speakerphone_key">speakerphone_preference</string>
     <string name="pref_speakerphone_default">auto</string>
-    <string name="order_cupcakes">Order Cupcakes</string>
-    <string name="one_cupcake">One Cupcake</string>
-    <string name="six_cupcakes">Six Cupcakes</string>
-    <string name="twelve_cupcakes">Twelve Cupcakes</string>
+    <string name="order_cupcakes">Eluwina</string>
+    <string name="one_cupcake">To nie działa :)</string>
+    <string name="six_cupcakes">To też nie działa :)</string>
+    <string name="twelve_cupcakes">A to jest dziadostwo :)</string>
     <string name="choose_flavor">Choose Flavor</string>
     <string name="vanilla">Vanilla</string>
     <string name="chocolate">Chocolate</string>

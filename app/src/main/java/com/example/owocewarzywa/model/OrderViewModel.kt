@@ -58,6 +58,9 @@ class OrderViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
+    private val _logged_in = MutableLiveData<String>()
+    val logged_in: LiveData<String> = _logged_in
+
     init {
         // Set initial values for the order
         resetOrder()
@@ -107,6 +110,10 @@ class OrderViewModel : ViewModel() {
         _flavor.value = ""
         _date.value = dateOptions[0]
         _price.value = 0.0
+    }
+
+    fun log_in(email: String){
+        _logged_in.value = email
     }
 
     /**

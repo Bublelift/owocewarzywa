@@ -39,9 +39,10 @@ class StartFragment : Fragment() {
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
     private var binding: FragmentStartBinding? = null
+    private var login = false
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
-    //private val sharedViewModel: OrderViewModel by activityViewModels()
+    private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +56,18 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.startFragment = this
+//        binding?.startFragment = this
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = sharedViewModel
+            startFragment = this@StartFragment
+        }
+        val user_logged_in = sharedViewModel.logged_in.value ?: 0
+        Log.e("CZY ZALOGOWANO",sharedViewModel.logged_in.value.toString())
+        if (user_logged_in == 0) {
+            findNavController().navigate(R.id.action_startFragment_to_loginFragment)
+        }
+
     }
 
     /**

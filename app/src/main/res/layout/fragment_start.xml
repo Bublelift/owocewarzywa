@@ -22,6 +22,10 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.example.owocewarzywa.model.OrderViewModel" />
+
+        <variable
             name="startFragment"
             type="com.example.owocewarzywa.StartFragment" />
     </data>
