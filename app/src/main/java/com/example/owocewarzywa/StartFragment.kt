@@ -28,6 +28,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.databinding.FragmentStartBinding
 import com.example.owocewarzywa.model.OrderViewModel
 import com.example.owocewarzywa.webrtc.LobbyActivity
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * This is the first screen of the Cupcake app. The user can choose how many cupcakes to order.
@@ -62,6 +63,7 @@ class StartFragment : Fragment() {
             viewModel = sharedViewModel
             startFragment = this@StartFragment
         }
+        (activity as MainActivity).supportActionBar?.show()
         val user_logged_in = sharedViewModel.logged_in.value ?: 0
         Log.e("CZY ZALOGOWANO",sharedViewModel.logged_in.value.toString())
         if (user_logged_in == 0) {
@@ -103,5 +105,9 @@ class StartFragment : Fragment() {
         }
 //        val intent = Intent (requ , LobbyActivity::class.java)
 //        startActivity(intent)
+    }
+
+    fun goProfile() {
+        findNavController().navigate(R.id.action_startFragment_to_myAccountFragment)
     }
 }

@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginFragment">
+    tools:context=".RegisterFragment">
 
     <data>
         <variable
-            name="loginFragment"
-            type="com.example.owocewarzywa.auth.LoginFragment" />
+            name="registerFragment"
+            type="com.example.owocewarzywa.auth.RegisterFragment" />
     </data>
 
     <ScrollView
@@ -16,36 +16,36 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/pic_greeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-425dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/greeting" />
+        <ImageView
+            android:id="@+id/pic_greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-425dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/greeting" />
 
-            <TextView
-                android:id="@+id/greeting"
-                android:layout_width="199dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="232dp"
-                android:fontFamily="sans-serif-condensed-light"
-                android:text="Witaj w PoliBiedzie!"
-                android:textAlignment="center"
-                android:textColor="#0086AC"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="199dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="232dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Witaj w PoliBiedzie!"
+            android:textAlignment="center"
+            android:textColor="#0086AC"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view"
                 android:layout_width="311dp"
-                android:layout_height="272dp"
+                android:layout_height="232dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 app:cardCornerRadius="6dp"
@@ -61,7 +61,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Zaloguj się"
+                    android:text="Zarejestruj się"
+                    app:errorEnabled="true"
                     android:textAlignment="center" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +73,6 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="35dp"
                     android:layout_marginRight="6dp"
-                    app:errorEnabled="true"
                     android:hint="Wprowadź adres email">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -103,37 +103,24 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/button_login"
-                    android:layout_width="225dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="55dp"
-                    android:onClick="@{() -> loginFragment.login()}"
-                    android:text="Zaloguj" />
-
-                <Button
-                    android:id="@+id/button_google"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:layout_width="225dp"
+                    android:id="@+id/button_register"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="10dp"
-                    android:text="Użyj konta Google"
-                    android:onClick="@{() -> loginFragment.google_login()}"
-                    app:icon="@drawable/google_30dp"
-                    app:iconTint="@null" />
+                    android:onClick="@{() -> registerFragment.register()}"
+                    android:text="Zarejestruj" />
 
             </androidx.cardview.widget.CardView>
-
             <Button
-                android:id="@+id/button_register"
+                android:id="@+id/button_login"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/register_here"
+                android:text="@string/login_here"
                 android:textAllCaps="false"
-                android:onClick="@{() -> loginFragment.go_to_register()}"
+                android:onClick="@{() -> registerFragment.go_to_login()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_view" />

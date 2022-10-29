@@ -95,4 +95,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 //            super.onBackPressed()
 //        }
 //    }
+    fun setAppBarVisibility(visible: Boolean) {
+//        (visible == true) ? supportActionBar?.hide() : supportActionBar?.show()
+        if (visible) supportActionBar?.hide() else supportActionBar?.show()
+    }
+
+
 }

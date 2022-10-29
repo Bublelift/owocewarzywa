@@ -16,6 +16,7 @@
 package com.example.owocewarzywa
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.databinding.FragmentPickupBinding
 import com.example.owocewarzywa.model.OrderViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
@@ -44,6 +46,7 @@ class PickupFragment : Fragment() {
     ): View? {
         val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+        Log.i("logged_user", FirebaseAuth.getInstance().currentUser.toString())
         return fragmentBinding.root
     }
 

@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -60,6 +61,11 @@ class OrderViewModel : ViewModel() {
 
     private val _logged_in = MutableLiveData<String>()
     val logged_in: LiveData<String> = _logged_in
+
+//    val username = null
+//    val userid = null
+//    val useremail = null
+//    val userpic = null
 
     init {
         // Set initial values for the order
@@ -112,8 +118,8 @@ class OrderViewModel : ViewModel() {
         _price.value = 0.0
     }
 
-    fun log_in(email: String){
-        _logged_in.value = email
+    fun log_in(uid: String){
+        _logged_in.value = uid
     }
 
     /**
