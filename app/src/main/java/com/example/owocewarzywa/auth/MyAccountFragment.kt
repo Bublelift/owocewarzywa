@@ -3,9 +3,9 @@ package com.example.owocewarzywa.auth
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.Image
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +14,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.owocewarzywa.R
-import com.example.owocewarzywa.chat.FirestoreUtil
-import com.example.owocewarzywa.chat.StorageUtil
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.owocewarzywa.model.OrderViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
+import com.example.owocewarzywa.utils.GlideApp
+import com.example.owocewarzywa.utils.StorageUtil
+import com.google.firebase.auth.FirebaseAuth
 import java.io.ByteArrayOutputStream
 
 
@@ -32,6 +35,7 @@ class MyAccountFragment : Fragment() {
     private val RC_SELECT_IMAGE = 2
     private lateinit var selectedImageBytes: ByteArray
     private var pictureJustChanged = false
+    private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +54,7 @@ class MyAccountFragment : Fragment() {
                 }
                 startActivityForResult(Intent.createChooser(intent, "Select Image"), RC_SELECT_IMAGE)
             }
-            findViewById<FloatingActionButton>(R.id.save).setOnClickListener {
+            findViewById<Button>(R.id.save).setOnClickListener {
                 if (::selectedImageBytes.isInitialized) StorageUtil.uploadProfilePhoto(selectedImageBytes) { imagePath ->
                     FirestoreUtil.updateCurrentUser(findViewById<EditText>(R.id.nickname_input).text.toString(),
                         findViewById<EditText>(R.id.bio_input).text.toString(), imagePath)
@@ -59,9 +63,14 @@ class MyAccountFragment : Fragment() {
                     FirestoreUtil.updateCurrentUser(findViewById<EditText>(R.id.nickname_input).text.toString(),
                         findViewById<EditText>(R.id.bio_input).text.toString(), null)
                 }
-                Toast.makeText(context,"Zapisano zmiany", Toast.LENGTH_SHORT)
+                Log.i("Save_button", "pressed")
+                Toast.makeText(requireContext(),"Zapisano zmiany", Toast.LENGTH_SHORT)
             }
-
+            findViewById<Button>(R.id.signout).setOnClickListener{
+                FirebaseAuth.getInstance().signOut()
+                sharedViewModel.log_in("")
+                findNavController().navigateUp()
+            }
         }
         return view
     }
@@ -75,7 +84,7 @@ class MyAccountFragment : Fragment() {
             selectedImageBmp.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
             selectedImageBytes = outputStream.toByteArray()
 
-            Glide.with(this).load(selectedImageBmp).into(profile_pic!!)
+            GlideApp.with(this).load(selectedImageBmp).into(profile_pic!!)
 
             pictureJustChanged = true
         }
@@ -88,7 +97,7 @@ class MyAccountFragment : Fragment() {
                 nickname!!.setText(user.name)
                 bio!!.setText(user.bio)
                 if (!pictureJustChanged && user.profilePicturePath != null)
-                    Glide.with(this)
+                    GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profilePicturePath))
                         .placeholder(R.drawable.no_profile)
                         .fallback(R.drawable.no_profile)

@@ -1,4 +1,4 @@
-package com.example.owocewarzywa.chat
+package com.example.owocewarzywa.utils
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage

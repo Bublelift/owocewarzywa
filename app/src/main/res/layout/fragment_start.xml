@@ -75,7 +75,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(6)}"
+                android:onClick="@{() -> startFragment.goPeople()}"
                 android:text="@string/six_cupcakes" />
 
             <Button

@@ -66,7 +66,7 @@ class StartFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.show()
         val user_logged_in = sharedViewModel.logged_in.value ?: 0
         Log.e("CZY ZALOGOWANO",sharedViewModel.logged_in.value.toString())
-        if (user_logged_in == 0) {
+        if (user_logged_in == 0 || user_logged_in == "") {
             findNavController().navigate(R.id.action_startFragment_to_loginFragment)
         }
 
@@ -109,5 +109,9 @@ class StartFragment : Fragment() {
 
     fun goProfile() {
         findNavController().navigate(R.id.action_startFragment_to_myAccountFragment)
+    }
+
+    fun goPeople() {
+        findNavController().navigate(R.id.action_startFragment_to_peopleFragment)
     }
 }
