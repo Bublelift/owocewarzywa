@@ -26,6 +26,8 @@
             android:layout_height="125dp"
             android:layout_gravity="center_horizontal|top"
             android:layout_marginTop="25dp"
+            android:background="#0ff"
+            app:srcCompat="@drawable/no_profile"
             tools:src="@drawable/no_profile" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,6 +65,14 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/cameraDecor"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="215dp"
+            android:src="@drawable/ic_baseline_photo_camera_24" />
     </androidx.cardview.widget.CardView>
 
     <Button

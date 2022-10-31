@@ -63,8 +63,7 @@ class MyAccountFragment : Fragment() {
                     FirestoreUtil.updateCurrentUser(findViewById<EditText>(R.id.nickname_input).text.toString(),
                         findViewById<EditText>(R.id.bio_input).text.toString(), null)
                 }
-                Log.i("Save_button", "pressed")
-                Toast.makeText(requireContext(),"Zapisano zmiany", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),"Zapisano zmiany", Toast.LENGTH_SHORT).show()
             }
             findViewById<Button>(R.id.signout).setOnClickListener{
                 FirebaseAuth.getInstance().signOut()
@@ -84,7 +83,9 @@ class MyAccountFragment : Fragment() {
             selectedImageBmp.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
             selectedImageBytes = outputStream.toByteArray()
 
-            GlideApp.with(this).load(selectedImageBmp).into(profile_pic!!)
+            GlideApp.with(this).load(selectedImageBmp).placeholder(R.drawable.no_profile)
+                .fallback(R.drawable.no_profile)
+                .error(R.drawable.no_profile).into(profile_pic!!)
 
             pictureJustChanged = true
         }
