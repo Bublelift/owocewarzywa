@@ -27,4 +27,6 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="blue">#558CB8</color>
+    <color name="grey_700">#777777</color>
+    <color name="grey_400">#BBBBBB</color>
 </resources>

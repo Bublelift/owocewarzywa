@@ -13,7 +13,7 @@ class PersonItem(val person: User, val userId: String, private val context: Cont
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.user_nickname.text = person.name
         viewHolder.user_bio.text = person.bio
-        if (person.profilePicturePath != null)
+        if (person.profilePicturePath != null && person.profilePicturePath != "")
             GlideApp.with(context).load(StorageUtil.pathToReference(person.profilePicturePath))
                 .placeholder(R.drawable.no_profile)
                 .into(viewHolder.user_pic)

@@ -17,7 +17,7 @@ class ChatAdapter(var data: MutableList<MessageItemUi>) : RecyclerView.Adapter<M
         val context = parent.context
         return when (viewType) {
             TYPE_MY_MESSAGE -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.my_chat_message, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.chat_message, parent, false)
                 MyMessageViewHolder(view)
             }
             TYPE_FRIEND_MESSAGE -> {
