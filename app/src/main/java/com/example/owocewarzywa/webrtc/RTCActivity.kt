@@ -119,7 +119,6 @@ class RTCActivity : AppCompatActivity() {
             remote_view.isGone = false
             Constants.isCallEnded = true
             finish()
-            startActivity(Intent(this@RTCActivity, LobbyActivity::class.java))
         }
     }
 

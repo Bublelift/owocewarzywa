@@ -97,13 +97,11 @@ class StartFragment : Fragment() {
     }
 
     fun goVoiceCall() {
-        Log.e("Context", activity.toString())
+
         activity?.let{
             val intent = Intent (it, LobbyActivity::class.java)
             it.startActivity(intent)
         }
-//        val intent = Intent (requ , LobbyActivity::class.java)
-//        startActivity(intent)
     }
 
     fun goProfile() {
@@ -112,5 +110,9 @@ class StartFragment : Fragment() {
 
     fun goPeople() {
         findNavController().navigate(R.id.action_startFragment_to_peopleFragment)
+    }
+
+    fun goPractice() {
+        findNavController().navigate(R.id.action_startFragment_to_practiceSettingsFragment)
     }
 }

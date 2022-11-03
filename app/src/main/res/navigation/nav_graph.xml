@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_startFragment_to_peopleFragment"
             app:destination="@id/peopleFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_practiceSettingsFragment"
+            app:destination="@id/practiceSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/flavorFragment"
@@ -115,4 +118,18 @@
         android:id="@+id/chatFragment"
         android:name="com.example.owocewarzywa.chat.ChatFragment"
         android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/practiceSettingsFragment"
+        android:name="com.example.owocewarzywa.practice.PracticeSettingsFragment"
+        android:label="Wybierz ustawienia ćwiczenia"
+        tools:layout="@layout/fragment_practice_settings" >
+        <action
+            android:id="@+id/action_practiceSettingsFragment_to_practiceSelect"
+            app:destination="@id/practiceSelect" />
+    </fragment>
+    <fragment
+        android:id="@+id/practiceSelect"
+        android:name="com.example.owocewarzywa.practice.PracticeSelect"
+        android:label="fragment_practice_select"
+        tools:layout="@layout/fragment_practice_select" />
 </navigation>

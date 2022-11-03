@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".practice.PracticeSettingsFragment">
+
+    <data>
+        <variable
+            name="practiceSettingsFragment"
+            type="com.example.owocewarzywa.practice.PracticeSettingsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:text="Ustawienia"
+            android:textSize="29dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/settings_label_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="40dp"
+            android:text="Wybierz język"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_title" />
+
+        <RelativeLayout
+            android:id="@+id/spinnerOutline1"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/spinner_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_lang">
+
+            <Spinner
+                android:id="@+id/spinner_language"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:elevation="10dp"
+                android:paddingLeft="14dp"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/settings_label_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Wybierz tematykę"
+            app:layout_constraintStart_toStartOf="@+id/settings_label_lang"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerOutline1" />
+
+        <RelativeLayout
+            android:id="@+id/SpinnerOutline2"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/spinner_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_topic">
+
+            <Spinner
+                android:id="@+id/spinner_topic"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:elevation="10dp"
+                android:paddingLeft="14dp"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/settings_label_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Wybierz poziom trudności"
+            app:layout_constraintStart_toStartOf="@+id/settings_label_topic"
+            app:layout_constraintTop_toBottomOf="@+id/SpinnerOutline2" />
+
+        <RelativeLayout
+            android:id="@+id/SpinnerOutline3"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/spinner_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_difficulty">
+
+            <Spinner
+                android:id="@+id/spinner_difficulty"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:elevation="10dp"
+                android:paddingLeft="14dp"
+                android:spinnerMode="dropdown" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/settings_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="Dalej"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

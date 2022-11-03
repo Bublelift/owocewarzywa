@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import com.example.owocewarzywa.R
+import com.example.owocewarzywa.model.OrderViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 //import kotlinx.android.synthetic.main.chat_lobby_layout.*
 
 class LobbyActivity : AppCompatActivity() {
@@ -17,6 +19,10 @@ class LobbyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_lobby_layout)
+        supportActionBar?.apply {
+            title = "Dołącz do rozmowy"
+            setDisplayHomeAsUpEnabled(true)
+        }
         /******JK******/
         val start_meeting = findViewById<MaterialButton>(R.id.start_meeting)
         val meeting_id = findViewById<EditText>(R.id.meeting_id)
@@ -29,21 +35,21 @@ class LobbyActivity : AppCompatActivity() {
                 meeting_id.error = "Please enter meeting id"
             else {
                 db.collection("calls")
-                        .document(meeting_id.text.toString())
-                        .get()
-                        .addOnSuccessListener {
-                            if (it["type"]=="OFFER" || it["type"]=="ANSWER" || it["type"]=="END_CALL") {
-                                meeting_id.error = "Please enter new meeting ID"
-                            } else {
-                                val intent = Intent(this@LobbyActivity, RTCActivity::class.java)
-                                intent.putExtra("meetingID",meeting_id.text.toString())
-                                intent.putExtra("isJoin",false)
-                                startActivity(intent)
-                            }
-                        }
-                        .addOnFailureListener {
+                    .document(meeting_id.text.toString())
+                    .get()
+                    .addOnSuccessListener {
+                        if (it["type"] == "OFFER" || it["type"] == "ANSWER" || it["type"] == "END_CALL") {
                             meeting_id.error = "Please enter new meeting ID"
+                        } else {
+                            val intent = Intent(this@LobbyActivity, RTCActivity::class.java)
+                            intent.putExtra("meetingID", meeting_id.text.toString())
+                            intent.putExtra("isJoin", false)
+                            startActivity(intent)
                         }
+                    }
+                    .addOnFailureListener {
+                        meeting_id.error = "Please enter new meeting ID"
+                    }
             }
         }
         join_meeting.setOnClickListener {
@@ -51,10 +57,15 @@ class LobbyActivity : AppCompatActivity() {
                 meeting_id.error = "Please enter meeting id"
             else {
                 val intent = Intent(this@LobbyActivity, RTCActivity::class.java)
-                intent.putExtra("meetingID",meeting_id.text.toString())
-                intent.putExtra("isJoin",true)
+                intent.putExtra("meetingID", meeting_id.text.toString())
+                intent.putExtra("isJoin", true)
                 startActivity(intent)
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return false
     }
 }

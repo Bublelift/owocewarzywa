@@ -1,3 +1,3 @@
-package com.example.owocewarzywa.chat
-
-class MessageItem(val content:String){}
+//package com.example.owocewarzywa.chat
+//
+//class MessageItem(val content:String){}
