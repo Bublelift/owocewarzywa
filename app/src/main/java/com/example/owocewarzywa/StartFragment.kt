@@ -113,6 +113,6 @@ class StartFragment : Fragment() {
     }
 
     fun goPractice() {
-        findNavController().navigate(R.id.action_startFragment_to_practiceSettingsFragment)
+        findNavController().navigate(R.id.action_startFragment_to_practiceSelect)
     }
 }

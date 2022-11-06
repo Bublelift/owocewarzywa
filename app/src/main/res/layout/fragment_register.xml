@@ -30,11 +30,11 @@
 
         <TextView
             android:id="@+id/greeting"
-            android:layout_width="199dp"
+            android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginTop="232dp"
             android:fontFamily="sans-serif-condensed-light"
-            android:text="Witaj w PoliBiedzie!"
+            android:text="Tworzenie nowego konta"
             android:textAlignment="center"
             android:textColor="#0086AC"
             android:textSize="24sp"

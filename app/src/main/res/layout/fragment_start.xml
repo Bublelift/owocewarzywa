@@ -41,20 +41,21 @@
             android:padding="@dimen/side_margin">
 
             <ImageView
-                android:layout_width="@dimen/image_size"
+                android:layout_width="380dp"
                 android:layout_height="@dimen/image_size"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:importantForAccessibility="no"
-                android:scaleType="center"
-                app:srcCompat="@drawable/cupcake" />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-10dp"
                 android:layout_marginBottom="@dimen/side_margin"
-                android:text="@string/order_cupcakes"
+                android:text="Menu"
                 android:textAppearance="?attr/textAppearanceHeadline4"
                 android:textColor="@color/material_on_background_emphasis_medium" />
 
@@ -66,7 +67,7 @@
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{() -> startFragment.goProfile()}"
-                android:text="@string/one_cupcake" />
+                android:text="Edycja profilu" />
 
             <Button
                 android:id="@+id/order_six_cupcakes"
@@ -76,7 +77,7 @@
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{() -> startFragment.goPeople()}"
-                android:text="@string/six_cupcakes" />
+                android:text="Czat tekstowy" />
 
             <Button
                 android:id="@+id/order_twelve_cupcakes"
@@ -86,7 +87,7 @@
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{() -> startFragment.goPractice()}"
-                android:text="@string/twelve_cupcakes" />
+                android:text="Ćwiczenia" />
 
             <Button
                 android:id="@+id/chat_lobby"
@@ -96,7 +97,7 @@
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{() -> startFragment.goVoiceCall()}"
-                android:text="Rozmawiaj" />
+                android:text="Rozmowa video" />
 
         </LinearLayout>
     </ScrollView>

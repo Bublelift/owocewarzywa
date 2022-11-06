@@ -22,19 +22,32 @@
                 android:id="@+id/pic_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-425dp"
+                android:layout_marginTop="-450dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/greeting" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="-15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/greeting" />
 
             <TextView
                 android:id="@+id/greeting"
                 android:layout_width="199dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="232dp"
+                android:layout_marginTop="160dp"
                 android:fontFamily="sans-serif-condensed-light"
-                android:text="Witaj w PoliBiedzie!"
+                android:text="Witaj w"
                 android:textAlignment="center"
                 android:textColor="#0086AC"
                 android:textSize="24sp"
@@ -44,15 +57,15 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view"
-                android:layout_width="311dp"
+                android:layout_width="340dp"
                 android:layout_height="272dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="15dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/greeting"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:strokeColor="#0085AB"
                 app:strokeWidth="13dp">
 
@@ -72,13 +85,15 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="35dp"
                     android:layout_marginRight="6dp"
-                    app:errorEnabled="true"
-                    android:hint="Wprowadź adres email">
+                    android:hint="Wprowadź adres email"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email_input"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,15 +104,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
                     android:hint="Wprowadź hasło"
-                    app:errorEnabled="true"
-                    app:endIconMode="password_toggle">
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -118,8 +133,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="10dp"
-                    android:text="Użyj konta Google"
                     android:onClick="@{() -> loginFragment.google_login()}"
+                    android:text="Użyj konta Google"
                     app:icon="@drawable/google_30dp"
                     app:iconTint="@null" />
 

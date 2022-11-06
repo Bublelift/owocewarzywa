@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -37,7 +38,8 @@ class PracticeSettingsFragment : Fragment() {
                 binding!!.spinnerTopic.selectedItem.toString(),
                 binding!!.spinnerDifficulty.selectedItem.toString()
             )
-            findNavController().navigate(R.id.action_practiceSettingsFragment_to_practiceSelect)
+            //findNavController().navigate(R.id.action_practiceSettingsFragment_to_practiceSelect)
+            Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
         }
     }
 
