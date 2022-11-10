@@ -33,13 +33,13 @@ class PracticeSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initSpinners()
         binding!!.settingsProgress.setOnClickListener {
-            practiceData.setPractice(
+            practiceData.setPracticeSettings(
                 binding!!.spinnerLanguage.selectedItem.toString(),
                 binding!!.spinnerTopic.selectedItem.toString(),
                 binding!!.spinnerDifficulty.selectedItem.toString()
             )
             //findNavController().navigate(R.id.action_practiceSettingsFragment_to_practiceSelect)
-            Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
+            goPractice()
         }
     }
 
@@ -86,5 +86,12 @@ class PracticeSettingsFragment : Fragment() {
             )
         difDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding!!.spinnerDifficulty.adapter = difDataAdapter;
+    }
+
+    private fun goPractice() {
+        when (practiceData.type.value) {
+            "unscramble" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_unscrambleFragment)
+            else -> Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
+        }
     }
 }

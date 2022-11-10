@@ -122,7 +122,11 @@
         android:id="@+id/practiceSettingsFragment"
         android:name="com.example.owocewarzywa.practice.PracticeSettingsFragment"
         android:label="Wybierz ustawienia ćwiczenia"
-        tools:layout="@layout/fragment_practice_settings" />
+        tools:layout="@layout/fragment_practice_settings" >
+        <action
+            android:id="@+id/action_practiceSettingsFragment_to_unscrambleFragment"
+            app:destination="@id/unscrambleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/practiceSelect"
         android:name="com.example.owocewarzywa.practice.PracticeSelect"
@@ -131,5 +135,15 @@
         <action
             android:id="@+id/action_practiceSelect_to_practiceSettingsFragment"
             app:destination="@id/practiceSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/unscrambleFragment"
+        android:name="com.example.owocewarzywa.practice.unscramble.UnscrambleFragment"
+        android:label="UnscrambleFragment" >
+        <action
+            android:id="@+id/action_unscrambleFragment_to_startFragment"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -42,6 +42,7 @@ class PracticeSelect : Fragment() {
             goSettings()
         }
         binding!!.buttonUnscramble.setOnClickListener{
+            practiceData.setPracticeType("unscramble")
             goSettings()
         }
         binding!!.buttonRiddles.setOnClickListener{
