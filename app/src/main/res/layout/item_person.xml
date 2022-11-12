@@ -41,6 +41,16 @@
             android:layout_marginTop="40dp"
             android:text="TextView"
             tools:text="Posnapuje jakaś zb loszka?" />
+
+        <ImageView
+            android:id="@+id/new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/new_msg"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

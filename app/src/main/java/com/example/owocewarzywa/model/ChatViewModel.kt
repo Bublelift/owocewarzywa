@@ -12,6 +12,9 @@ class ChatViewModel : ViewModel() {
     private val _chatUserId = MutableLiveData<String>()
     val chatUserId: LiveData<String> = _chatUserId
 
+    private val _search = MutableLiveData<String>()
+    val search: LiveData<String> = _search
+
     init {
         resetData()
     }
@@ -24,5 +27,9 @@ class ChatViewModel : ViewModel() {
     fun setChatUser(username: String, uid: String) {
         _chatUserName.value = username
         _chatUserId.value = uid
+    }
+
+    fun search(input: String) {
+        _search.value = input
     }
 }

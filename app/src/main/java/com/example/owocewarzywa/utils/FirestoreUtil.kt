@@ -2,7 +2,10 @@ package com.example.owocewarzywa.utils
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.example.owocewarzywa.model.ChatChannel
+import com.example.owocewarzywa.model.ChatViewModel
 import com.example.owocewarzywa.model.TextMessage
 import com.example.owocewarzywa.model.User
 import com.example.owocewarzywa.recyclerview.item.PersonItem
@@ -22,6 +25,8 @@ object FirestoreUtil {
         get() = firestoreInstance.document("users/${FirebaseAuth.getInstance().uid}")
 
     private val chatChannelsCollectionRef = firestoreInstance.collection("chatChannels")
+
+    private var userList = "swing" ?: null
 
     fun updateCurrentUser(name: String = "", bio: String = "", profilePicturePath: String? = null) {
         val userFieldMap = mutableMapOf<String, Any>()
@@ -49,7 +54,7 @@ object FirestoreUtil {
         currentUserDocRef.get().addOnSuccessListener { onComplete(it.toObject(User::class.java)!!) }
     }
 
-    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
+    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit, search: LiveData<String>): ListenerRegistration {
         return firestoreInstance.collection("users")
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 if (firebaseFirestoreException != null) {
@@ -60,10 +65,13 @@ object FirestoreUtil {
                     )
                     return@addSnapshotListener
                 }
-
+Log.e("search", search.value.toString())
                 val items = mutableListOf<Item>()
                 querySnapshot?.documents?.forEach {
                     if (it.id != FirebaseAuth.getInstance().currentUser?.uid)
+                        if (search.value == null ||
+                            it.toObject(User::class.java)!!.name.toString().toLowerCase().contains(search.value!!) ||
+                            it.id.toString().contains(search.value!!))
                         items.add(PersonItem(it.toObject(User::class.java)!!, it.id, context))
                 }
                 onListen(items)
@@ -115,5 +123,21 @@ object FirestoreUtil {
 
     fun sendMessage(message: TextMessage, channelId: String) {
         chatChannelsCollectionRef.document(channelId).collection("messages").add(message)
+    }
+
+    fun getMsgReadStatus(chatroomId: String, onSuccess: (toReadBy: String) -> Unit){
+        var toReadBy: String? = null
+        chatChannelsCollectionRef.document(chatroomId).get()
+            .addOnSuccessListener { if (it.exists()) {
+                    toReadBy = it["toReadBy"].toString()
+                }
+                if (toReadBy == null || toReadBy!!.isBlank())
+                    onSuccess("")
+                else onSuccess(toReadBy.toString())
+            }
+    }
+
+    fun setMsgReadStatus(chatroomId: String, status: String) {
+        chatChannelsCollectionRef.document(chatroomId).set(mapOf("toReadBy" to status))
     }
 }
