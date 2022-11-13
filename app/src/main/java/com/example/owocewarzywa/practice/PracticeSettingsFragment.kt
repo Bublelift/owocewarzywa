@@ -92,6 +92,7 @@ class PracticeSettingsFragment : Fragment() {
         when (practiceData.type.value) {
             "unscramble" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_unscrambleFragment)
             "quiz" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_quizFragment)
+            "memo" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_memoFragment)
             else -> Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
         }
     }

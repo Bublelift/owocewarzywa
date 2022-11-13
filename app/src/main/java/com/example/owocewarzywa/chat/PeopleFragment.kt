@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,13 +46,12 @@ class PeopleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userListenerRegistration = FirestoreUtil.addUsersListener(this.requireActivity(), this::updateRecyclerView,
-            chatViewModel.search
-        )
+        userListenerRegistration = FirestoreUtil.addUsersListener(this.requireActivity(), this::updateRecyclerView)
         return inflater.inflate(R.layout.fragment_people, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        people_loading.visibility = View.VISIBLE
         super.onViewCreated(view, savedInstanceState)
         people_search.addTextChangedListener(object : TextWatcher {
 
@@ -76,6 +76,7 @@ class PeopleFragment : Fragment() {
     }
 
     private fun updateRecyclerView(items: List<Item>){
+        people_loading.visibility = View.VISIBLE
         if (displayedItems.isEmpty()) displayedItems = items
         fun init() {
             recycler_view_people.apply{
@@ -115,6 +116,8 @@ class PeopleFragment : Fragment() {
             init()
         else
             updateItems()
+        
+        people_loading.visibility = View.GONE
     }
 
 }

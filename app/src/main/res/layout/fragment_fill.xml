@@ -49,7 +49,7 @@
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Ale beliar nie znosił widoku światła i niszczył wszystko co innos stworzył." />
+                    tools:text="Ale beliar nie znosił widoku światła i (1)______ wszystko co innos stworzył." />
 
             </androidx.cardview.widget.CardView>
 

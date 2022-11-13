@@ -40,6 +40,7 @@ class PracticeSelect : Fragment() {
             goSettings()
         }
         binding!!.buttonMemory.setOnClickListener{
+            practiceData.setPracticeType("memo")
             goSettings()
         }
         binding!!.buttonUnscramble.setOnClickListener{

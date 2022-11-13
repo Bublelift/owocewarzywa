@@ -129,6 +129,9 @@
         <action
             android:id="@+id/action_practiceSettingsFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
+        <action
+            android:id="@+id/action_practiceSettingsFragment_to_memoFragment"
+            app:destination="@id/memoFragment" />
     </fragment>
     <fragment
         android:id="@+id/practiceSelect"
@@ -154,4 +157,9 @@
         android:name="com.example.owocewarzywa.practice.quiz.QuizFragment"
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz" />
+    <fragment
+        android:id="@+id/memoFragment"
+        android:name="com.example.owocewarzywa.practice.memo.MemoFragment"
+        android:label="fragment_memo"
+        tools:layout="@layout/fragment_memo" />
 </navigation>

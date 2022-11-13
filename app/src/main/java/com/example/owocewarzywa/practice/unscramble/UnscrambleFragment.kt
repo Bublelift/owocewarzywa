@@ -86,15 +86,6 @@ class UnscrambleFragment : Fragment() {
     }
 
     /*
-     * Gets a random word for the list of words and shuffles the letters in it.
-     */
-    private fun getNextScrambledWord(): String {
-        val tempWord = allWordsList.random().toCharArray()
-        tempWord.shuffle()
-        return String(tempWord)
-    }
-
-    /*
     * Creates and shows an AlertDialog with the final score.
     */
     private fun showFinalScoreDialog() {
@@ -102,9 +93,6 @@ class UnscrambleFragment : Fragment() {
             .setTitle("Gratulacje!")
             .setMessage(String.format("Wynik: %d", viewModel.score.value))
             .setCancelable(false)
-//            .setNegativeButton("Wyjdź") { _, _ ->
-//                exitGame()
-//            }
             .setPositiveButton("Menu główne") { _, _ ->
                 goMenu()
             }
@@ -116,23 +104,6 @@ class UnscrambleFragment : Fragment() {
         findNavController().navigate(R.id.action_unscrambleFragment_to_startFragment)
     }
 
-
-    /*
-     * Re-initializes the data in the ViewModel and updates the views with the new data, to
-     * restart the game.
-     */
-    private fun restartGame() {
-        viewModel.reinitializeData()
-        setErrorTextField(false)
-    }
-
-
-    /*
-     * Exits the game.
-     */
-    private fun exitGame() {
-        activity?.finish()
-    }
 
     /*
     * Sets and resets the text field error status.

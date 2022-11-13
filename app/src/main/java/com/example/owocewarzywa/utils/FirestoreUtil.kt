@@ -54,24 +54,20 @@ object FirestoreUtil {
         currentUserDocRef.get().addOnSuccessListener { onComplete(it.toObject(User::class.java)!!) }
     }
 
-    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit, search: LiveData<String>): ListenerRegistration {
+    fun addUsersListener(context: Context, onListen: (List<Item>) -> Unit): ListenerRegistration {
         return firestoreInstance.collection("users")
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 if (firebaseFirestoreException != null) {
                     Log.e(
                         "Firestore",
-                        "Wyjebało się na firestoreutil.kt 44",
+                        "Dupa na firestoreutil.kt 59",
                         firebaseFirestoreException
                     )
                     return@addSnapshotListener
                 }
-Log.e("search", search.value.toString())
                 val items = mutableListOf<Item>()
                 querySnapshot?.documents?.forEach {
                     if (it.id != FirebaseAuth.getInstance().currentUser?.uid)
-                        if (search.value == null ||
-                            it.toObject(User::class.java)!!.name.toString().toLowerCase().contains(search.value!!) ||
-                            it.id.toString().contains(search.value!!))
                         items.add(PersonItem(it.toObject(User::class.java)!!, it.id, context))
                 }
                 onListen(items)
