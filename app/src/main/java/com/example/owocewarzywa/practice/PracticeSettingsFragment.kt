@@ -1,5 +1,6 @@
 package com.example.owocewarzywa.practice
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,11 +47,9 @@ class PracticeSettingsFragment : Fragment() {
     private fun initSpinners() {
         var languages = ArrayList<String>()
         languages.apply {
-            add("Polski")
-            add("English")
-            add("Deutsch")
-            add("Español")
-            add("日本語")
+            add(resources.getString(R.string.lang_pl))
+            add(resources.getString(R.string.lang_en))
+            add(resources.getString(R.string.lang_ge))
         }
         val langDataAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, languages)
@@ -59,11 +58,9 @@ class PracticeSettingsFragment : Fragment() {
 
         var topics = ArrayList<String>()
         topics.apply {
-            add("Jedzenie")
-            add("Szkoła")
-            add("Motoryzacja")
-            add("Geografia")
-            add("Teoria strun")
+            add(resources.getString(R.string.tpc_nat))
+            add(resources.getString(R.string.tpc_lif))
+            add(resources.getString(R.string.tpc_tec))
         }
         val topDataAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, topics)
@@ -72,10 +69,8 @@ class PracticeSettingsFragment : Fragment() {
 
         var diffuculties = ArrayList<String>()
         diffuculties.apply {
-            add("Bułka z masłem")
-            add("Proste jak granice stanów")
-            add("Średnie jak sos w kebabie")
-            add("Trudny orzech do zgryzienia")
+            add(resources.getString(R.string.dif_ez))
+            add(resources.getString(R.string.dif_hd))
             add("Egzamin z elektrotechniki u LJ")
         }
         val difDataAdapter: ArrayAdapter<String> =
@@ -89,10 +84,16 @@ class PracticeSettingsFragment : Fragment() {
     }
 
     private fun goPractice() {
+        practiceData.setPracticeSettings(
+            binding!!.spinnerLanguage.selectedItem.toString(),
+            binding!!.spinnerTopic.selectedItem.toString(),
+            binding!!.spinnerDifficulty.selectedItem.toString()
+        )
         when (practiceData.type.value) {
             "unscramble" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_unscrambleFragment)
             "quiz" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_quizFragment)
             "memo" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_memoFragment)
+            "fill" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_fillFragment)
             else -> Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
         }
     }

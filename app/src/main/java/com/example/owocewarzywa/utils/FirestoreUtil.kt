@@ -4,10 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.owocewarzywa.model.ChatChannel
-import com.example.owocewarzywa.model.ChatViewModel
-import com.example.owocewarzywa.model.TextMessage
-import com.example.owocewarzywa.model.User
+import com.example.owocewarzywa.model.*
 import com.example.owocewarzywa.recyclerview.item.PersonItem
 import com.example.owocewarzywa.recyclerview.item.TextMessageItem
 import com.google.apphosting.datastore.testing.DatastoreTestTrace.FirestoreV1Action.Listen
@@ -133,7 +130,8 @@ object FirestoreUtil {
             }
     }
 
-    fun setMsgReadStatus(chatroomId: String, status: String) {
-        chatChannelsCollectionRef.document(chatroomId).set(mapOf("toReadBy" to status))
+    fun setMsgReadStatus(chatroomId: String, otherUserId: String, status: String) {
+        val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
+        chatChannelsCollectionRef.document(chatroomId).set(updatedChatChannel(mutableListOf(currentUserId, otherUserId), status))
     }
 }

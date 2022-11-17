@@ -1,5 +1,6 @@
 package com.example.owocewarzywa.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,8 +34,21 @@ class PracticeViewModel: ViewModel(){
     }
 
     fun setPracticeSettings(language: String, topic: String, difficulty: String) {
-        _language.value = language
-        _topic.value = topic
-        _difficulty.value = difficulty
+        _language.value = when (language) {
+            in listOf("Polski", "Polish") -> "polish"
+            in listOf("Niemiecki", "German") -> "german"
+            else -> "english"
+        }
+        _topic.value = when (topic) {
+            in listOf("Natura", "Nature")-> "nature"
+            in listOf("Styl życia", "Lifestyle") -> "lifestyle"
+            else -> "technology"
+        }
+        _difficulty.value = when (difficulty) {
+            in listOf("Łatwy", "Easy") -> "easy"
+            in listOf("Trudny", "Hard") -> "hard"
+            else -> "hard"
+        }
+        Log.e("practice", "lan: $language, top: $topic, dif: $difficulty")
     }
 }

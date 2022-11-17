@@ -37,6 +37,7 @@ class PracticeSelect : Fragment() {
             goSettings()
         }
         binding!!.buttonLuki.setOnClickListener{
+            practiceData.setPracticeType("fill")
             goSettings()
         }
         binding!!.buttonMemory.setOnClickListener{

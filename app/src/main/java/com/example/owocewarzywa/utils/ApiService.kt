@@ -1,5 +1,6 @@
 package com.example.owocewarzywa.utils
 
+import com.example.owocewarzywa.practice.fill.FillData
 import com.example.owocewarzywa.practice.quiz.QuizData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -7,9 +8,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 //import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL =
-    "https://android-kotlin-fun-mars-server.appspot.com"
+    "https://jezykowy-zawrot-glowy.herokuapp.com/api/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -23,9 +25,21 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface DataApiService {
-    @GET("photos")
-    suspend fun getQuiz(): List<QuizData>
-//    suspend fun getPhotos(): String
+    @GET("users")
+    suspend fun getQuiz(
+        @Query("task") task: String,
+        @Query("level") level:String,
+        @Query("language") language: String,
+        @Query("category") category: String
+    ): List<QuizData>
+
+    @GET("users")
+    suspend fun getFill(
+        @Query("task") task: String,
+        @Query("level") level:String,
+        @Query("language") language: String,
+        @Query("category") category: String
+    ): List<FillData>
 }
 
 object DataApi {

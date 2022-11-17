@@ -47,17 +47,17 @@ class ChatFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = chatViewModel.chatUserName.value.toString()
         val otherUserId = chatViewModel.chatUserId.value.toString()
         FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->
-            FirestoreUtil.setMsgReadStatus(channelId, "")
+            FirestoreUtil.setMsgReadStatus(channelId, otherUserId, "")
             messagesListenerRegistration = FirestoreUtil.addChatMessagesListener(channelId, requireContext(), this::onMessagesChanged)
             chat_send.setOnClickListener{
-                if (chat_input.text != null) {
+                if (chat_input.text!!.isNotBlank()) {
                     val messageToSend = TextMessage(
                         chat_input.text.toString(),
                         Calendar.getInstance().time,
                         FirebaseAuth.getInstance().currentUser!!.uid)
                     chat_input.setText("")
                     FirestoreUtil.sendMessage(messageToSend, channelId)
-                    FirestoreUtil.setMsgReadStatus(channelId, otherUserId)
+                    FirestoreUtil.setMsgReadStatus(channelId, otherUserId, otherUserId)
                 }
             }
         }
