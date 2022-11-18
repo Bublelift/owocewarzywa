@@ -12,48 +12,24 @@ import kotlinx.coroutines.launch
 class QuizViewModel : ViewModel() {
 
     private val _apiStatus = MutableLiveData<String>()
-    val apiStatus: LiveData<String> = _apiStatus
 
     private val _apiResponse = MutableLiveData<List<QuizData>>()
-    val apiResponse: LiveData<List<QuizData>> = _apiResponse
 
     private val _question1 = MutableLiveData<String>()
     val question1: LiveData<String> = _question1
 
-    private val _q1answer1 = MutableLiveData<String>()
-    val q1answer1: LiveData<String> = _q1answer1
-
-    private val _q1answer2 = MutableLiveData<String>()
-    val q1answer2: LiveData<String> = _q1answer2
-
-    private val _q1answer3 = MutableLiveData<String>()
-    val q1answer3: LiveData<String> = _q1answer3
-
     private val _question2 = MutableLiveData<String>()
     val question2: LiveData<String> = _question2
-
-    private val _q2answer1 = MutableLiveData<String>()
-    val q2answer1: LiveData<String> = _q2answer1
-
-    private val _q2answer2 = MutableLiveData<String>()
-    val q2answer2: LiveData<String> = _q2answer2
-
-    private val _q2answer3 = MutableLiveData<String>()
-    val q2answer3: LiveData<String> = _q2answer3
 
     private val _question3 = MutableLiveData<String>()
     val question3: LiveData<String> = _question3
 
-    private val _q3answer1 = MutableLiveData<String>()
-    val q3answer1: LiveData<String> = _q3answer1
+    private var _questions = MutableLiveData<List<String>>()
+    val questions: LiveData<List<String>> = _questions
 
-    private val _q3answer2 = MutableLiveData<String>()
-    val q3answer2: LiveData<String> = _q3answer2
+    private var _correctAnswers = MutableLiveData<List<String>>()
+    val correctAnswers: LiveData<List<String>> = _correctAnswers
 
-    private val _q3answer3 = MutableLiveData<String>()
-    val q3answer3: LiveData<String> = _q3answer3
-
-//    private var _q1answers: MutableList<MutableLiveData<String>> = mutableListOf()
     private var _q1answers = MutableLiveData<List<String>>()
     val q1answers: LiveData<List<String>> = _q1answers
 
@@ -65,39 +41,34 @@ class QuizViewModel : ViewModel() {
 
     private fun prepareQuizData() {
         if (_apiResponse.value != null) {
+            var q1 = ""
+            var q2 = ""
+            var q3 = ""
+            var a1 = ""
+            var a2 = ""
+            var a3 = ""
             with(_apiResponse.value!!.first()) {
-                _question1.value = this.question
+                a1 = this.correctAnswer
+                q1 = this.question
                 _q1answers.value = listOf(this.correctAnswer, this.answer2, this.answer3).shuffled()
             }
             with(_apiResponse.value!!.get(1)) {
-                _question2.value = this.question
+                q2 = this.question
+                a2 = this.correctAnswer
                 _q2answers.value = listOf(this.correctAnswer, this.answer2, this.answer3).shuffled()
             }
             with(_apiResponse.value!!.last()) {
-                _question3.value = this.question
+                q3 = this.question
+                a3 = this.correctAnswer
                 _q3answers.value = listOf(this.correctAnswer, this.answer2, this.answer3).shuffled()
             }
-//            _question1.value = _apiResponse.value!!.first().question
-//            _apiResponse.value!!.first().correctAnswer
-//            _q1answers = answers1
-//            _q1answer1.value = _
-//            _q1answer2.value = ""
-//            _q1answer3.value = ""
-//            _question2.value = ""
-//            _q2answer1.value = ""
-//            _q2answer2.value = ""
-//            _q2answer3.value = ""
-//            _question3.value = ""
-//            _q3answer1.value = ""
-//            _q3answer2.value = ""
-//            _q3answer3.value = ""
+            _questions.value = listOf(q1, q2, q3)
+            _correctAnswers.value = listOf(a1, a2, a3)
         }
         else {
-            _question1.value = "loading data"
+            _questions.value = listOf("loading data", "loading data", "loading data")
             _q1answers.value = listOf("loading data", "loading data", "loading data")
-            _question2.value = "loading data"
             _q2answers.value = listOf("loading data", "loading data", "loading data")
-            _question3.value = "loading data"
             _q3answers.value = listOf("loading data", "loading data", "loading data")
         }
     }

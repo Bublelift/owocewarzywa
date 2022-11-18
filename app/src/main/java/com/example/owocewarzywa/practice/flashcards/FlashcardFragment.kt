@@ -1,47 +1,40 @@
-package com.example.owocewarzywa.practice.unscramble
+package com.example.owocewarzywa.practice.flashcards
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
-import com.example.owocewarzywa.databinding.FragmentUnscrambleBinding
-import com.example.owocewarzywa.model.PracticeViewModel
+import com.example.owocewarzywa.databinding.FragmentFlashcardBinding
+import com.example.owocewarzywa.utils.GlideApp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.fragment_login.*
 
-/**
- * Fragment where the game is played, contains the game logic.
- */
-class UnscrambleFragment : Fragment() {
 
-    private val viewModel: UnscrambleViewModel by viewModels()
-    private val practiceData: PracticeViewModel by activityViewModels()
+class FlashcardFragment : Fragment() {
 
-    // Binding object instance with access to the views in the game_fragment.xml layout
-    private lateinit var binding: FragmentUnscrambleBinding
+    private lateinit var binding: FragmentFlashcardBinding
 
-    // Create a ViewModel the first time the fragment is created.
-    // If the fragment is re-created, it receives the same com.example.android.unscramble.ui.game.GameViewModel instance created by the
-    // first fragment
+    private val viewModel: FlashcardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout XML file and return a binding object instance
-        binding = FragmentUnscrambleBinding.inflate(inflater, container, false)
+        binding = FragmentFlashcardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.gameViewModel = viewModel
-        binding.maxNoOfWords = MAX_NO_OF_WORDS
+        binding.flashcardViewModel = viewModel
+        binding.maxNoOfCards = 10
         binding.lifecycleOwner = viewLifecycleOwner
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
@@ -49,7 +42,8 @@ class UnscrambleFragment : Fragment() {
         // Update the UI
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)
         binding.wordCount.text = String.format(
-            "%d z %d słów", viewModel.currentWordCount.value, MAX_NO_OF_WORDS)
+            "%d z %d słów", viewModel.currentWordCount.value, 10)
+        binding.flashcardHint1.text = "Kategoria: "+ viewModel.currentCategory.value
         updateNextWordOnScreen()
     }
 
@@ -77,11 +71,28 @@ class UnscrambleFragment : Fragment() {
     * Skips the current word without changing the score.
     */
     private fun onSkipWord() {
-        if (viewModel.nextWord()) {
-            setErrorTextField(false)
-            updateNextWordOnScreen()
-        } else {
-            showFinalScoreDialog()
+        when (viewModel.hints.value) {
+            2 -> {
+                binding.flashcardHint1.visibility = View.VISIBLE
+                binding.submit.layoutParams = setTopMargin(30)
+                binding.skip.text = "Podpowiedź (1)"
+                viewModel.hints.value = 1
+            }
+            1 -> {
+                renderImageHint(viewModel.currentImage.value!!)
+                binding.submit.layoutParams = setTopMargin(10)
+                binding.flashcardHint2.visibility = View.VISIBLE
+                binding.skip.text = "Pomiń"
+                viewModel.hints.value = 0
+            }
+            0 -> {
+                if (viewModel.nextWord()) {
+                    setErrorTextField(false)
+                    updateNextWordOnScreen()
+                } else {
+                    showFinalScoreDialog()
+                }
+            }
         }
     }
 
@@ -122,9 +133,31 @@ class UnscrambleFragment : Fragment() {
      * Displays the next scrambled word on screen.
      */
     private fun updateNextWordOnScreen() {
+        viewModel.hints.value = 2
+        binding.skip.text = "Podpowiedź (2)"
+        binding.flashcardHint1.text = "Kategoria: " + viewModel.currentCategory.value
+        binding.flashcardHint1.visibility = View.GONE
+        binding.flashcardHint2.visibility = View.GONE
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)
         binding.wordCount.text = String.format(
-            "%d z %d słów", viewModel.currentWordCount.value, MAX_NO_OF_WORDS)
-        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord.value
+            "%d z %d słów", viewModel.currentWordCount.value, 10)
+        binding.textViewUnscrambledWord.text = viewModel.currentFlashWord.value
+    }
+
+    private fun renderImageHint(url: String) {
+        GlideApp.with(this)
+            .load(url)
+            .error(R.drawable.ic_error)
+            .into(binding.flashcardHint2)
+    }
+
+    private fun setTopMargin(margin: Int): ConstraintLayout.LayoutParams {
+        val margindp = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, margin.toFloat(), resources
+                .displayMetrics
+        ).toInt()
+        val layoutParams = binding.submit.layoutParams as ConstraintLayout.LayoutParams
+        layoutParams.setMargins(0, margindp, 0, 0)
+        return layoutParams
     }
 }

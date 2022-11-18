@@ -94,6 +94,7 @@ class PracticeSettingsFragment : Fragment() {
             "quiz" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_quizFragment)
             "memo" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_memoFragment)
             "fill" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_fillFragment)
+            "flashcards" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_flashcardFragment)
             else -> Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
         }
     }

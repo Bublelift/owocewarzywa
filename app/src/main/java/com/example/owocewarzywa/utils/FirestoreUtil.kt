@@ -27,6 +27,7 @@ object FirestoreUtil {
 
     fun updateCurrentUser(name: String = "", bio: String = "", profilePicturePath: String? = null) {
         val userFieldMap = mutableMapOf<String, Any>()
+        userFieldMap["uid"] = FirebaseAuth.getInstance().currentUser!!.uid
         if (name.isNotBlank()) userFieldMap["name"] = name
         if (bio.isNotBlank()) userFieldMap["bio"] = bio
         if (profilePicturePath != null) userFieldMap["profilePicturePath"] = profilePicturePath

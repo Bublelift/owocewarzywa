@@ -27,6 +27,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.databinding.FragmentStartBinding
 import com.example.owocewarzywa.model.OrderViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
 import com.example.owocewarzywa.webrtc.LobbyActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -67,6 +68,9 @@ class StartFragment : Fragment() {
         Log.e("CZY ZALOGOWANO",sharedViewModel.logged_in.value.toString())
         if (user_logged_in == 0 || user_logged_in == "") {
             findNavController().navigate(R.id.action_startFragment_to_loginFragment)
+        }
+        FirestoreUtil.getCurrentUser { user ->
+            if (user.name == null) findNavController().navigate(R.id.action_startFragment_to_myAccountFragment)
         }
 
     }

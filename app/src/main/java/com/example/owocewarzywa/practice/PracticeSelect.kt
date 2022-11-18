@@ -34,6 +34,7 @@ class PracticeSelect : Fragment() {
             goSettings()
         }
         binding!!.buttonFiszki.setOnClickListener{
+            practiceData.setPracticeType("flashcards")
             goSettings()
         }
         binding!!.buttonLuki.setOnClickListener{

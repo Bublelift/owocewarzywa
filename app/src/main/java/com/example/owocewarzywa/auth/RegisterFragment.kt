@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
         val password = binding!!.passwordInput.text.toString()
         if (email == "" || password.toCharArray().size < 6)
             if (email == "") binding!!.email.setError("Email nie może być pusty")
-            if (password.toCharArray().size < 6) binding!!.password.setError("Hasło nie może być krótsze niż 6 znaków")
+            else binding!!.password.setError("Hasło nie może być krótsze niż 6 znaków")
         else {
             auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(task.isSuccessful){

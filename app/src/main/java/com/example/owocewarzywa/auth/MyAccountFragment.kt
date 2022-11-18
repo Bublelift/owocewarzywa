@@ -55,15 +55,25 @@ class MyAccountFragment : Fragment() {
                 startActivityForResult(Intent.createChooser(intent, "Select Image"), RC_SELECT_IMAGE)
             }
             findViewById<Button>(R.id.save).setOnClickListener {
-                if (::selectedImageBytes.isInitialized) StorageUtil.uploadProfilePhoto(selectedImageBytes) { imagePath ->
-                    FirestoreUtil.updateCurrentUser(findViewById<EditText>(R.id.nickname_input).text.toString(),
-                        findViewById<EditText>(R.id.bio_input).text.toString(), imagePath)
-                }
+                if (findViewById<EditText>(R.id.nickname_input).text.toString().length < 1)
+                    findViewById<EditText>(R.id.nickname_input).setError("Podaj nazwę użytkownika")
                 else {
-                    FirestoreUtil.updateCurrentUser(findViewById<EditText>(R.id.nickname_input).text.toString(),
-                        findViewById<EditText>(R.id.bio_input).text.toString(), null)
+                    if (::selectedImageBytes.isInitialized) StorageUtil.uploadProfilePhoto(
+                        selectedImageBytes
+                    ) { imagePath ->
+                        FirestoreUtil.updateCurrentUser(
+                            findViewById<EditText>(R.id.nickname_input).text.toString(),
+                            findViewById<EditText>(R.id.bio_input).text.toString(), imagePath
+                        )
+                    }
+                    else {
+                        FirestoreUtil.updateCurrentUser(
+                            findViewById<EditText>(R.id.nickname_input).text.toString(),
+                            findViewById<EditText>(R.id.bio_input).text.toString(), null
+                        )
+                    }
+                    Toast.makeText(requireContext(), "Zapisano zmiany", Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(requireContext(),"Zapisano zmiany", Toast.LENGTH_SHORT).show()
             }
             findViewById<Button>(R.id.signout).setOnClickListener{
                 FirebaseAuth.getInstance().signOut()

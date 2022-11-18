@@ -1,6 +1,7 @@
 package com.example.owocewarzywa.utils
 
 import com.example.owocewarzywa.practice.fill.FillData
+import com.example.owocewarzywa.practice.flashcards.FlashcardData
 import com.example.owocewarzywa.practice.quiz.QuizData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -40,6 +41,14 @@ interface DataApiService {
         @Query("language") language: String,
         @Query("category") category: String
     ): List<FillData>
+
+    @GET("users")
+    suspend fun getFlashcards(
+        @Query("task") task: String,
+        @Query("level") level:String,
+        @Query("language") language: String,
+        @Query("category") category: String
+    ): List<FlashcardData>
 }
 
 object DataApi {
