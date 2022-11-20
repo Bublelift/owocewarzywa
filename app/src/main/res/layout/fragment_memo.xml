@@ -5,7 +5,6 @@
     tools:context=".practice.memo.MemoFragment">
 
     <data>
-
         <variable
             name="memoFragment"
             type="com.example.owocewarzywa.practice.memo.MemoFragment" />
@@ -14,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/score"
@@ -33,7 +31,7 @@
             android:id="@+id/memo_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="46dp"
             android:paddingHorizontal="20dp"
             android:text="Wskaż obrazek zawierający:"
             android:textAlignment="center"
@@ -43,7 +41,7 @@
             android:id="@+id/memo_goal"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginVertical="7dp"
             android:text="kota"
             android:textColor="@color/black"
             android:textSize="24dp"
@@ -53,6 +51,7 @@
             app:layout_constraintTop_toBottomOf="@id/memo_label" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/memo_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
@@ -66,10 +65,37 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/barrier"
+                    android:src="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:elevation="10dp"
+                    android:padding="5dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+
+                <ImageView
                     android:id="@+id/memo_pic1"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse1"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -80,6 +106,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
+
+               <ImageView
+                    android:id="@+id/memo_reverse2"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -90,6 +130,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic1"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse3"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic1"
@@ -100,6 +154,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic2"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse4"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic2"
@@ -110,6 +178,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic3"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse5"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic3"
@@ -120,6 +202,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic4"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse6"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic4"
@@ -130,6 +226,19 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="7dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic5"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse7"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic5"
@@ -140,6 +249,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic6"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse8"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic6"
@@ -150,6 +273,20 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic7"
+                    app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse9"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic7"
@@ -160,12 +297,49 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
+                    android:elevation="6dp"
+                    android:clickable="false"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/memo_pic8"
                     app:srcCompat="@drawable/logo" />
+
+                <ImageView
+                    android:id="@+id/memo_reverse10"
+                    android:background="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:elevation="7dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic8"
+                    app:srcCompat="@drawable/logo" />
+
+                <Button
+                    android:id="@+id/button_ready"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memo_pic10"
+                    android:layout_marginVertical="16dp"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/memoloading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:elevation="10dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

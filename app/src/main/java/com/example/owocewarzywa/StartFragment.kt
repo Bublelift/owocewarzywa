@@ -69,8 +69,10 @@ class StartFragment : Fragment() {
         if (user_logged_in == 0 || user_logged_in == "") {
             findNavController().navigate(R.id.action_startFragment_to_loginFragment)
         }
-        FirestoreUtil.getCurrentUser { user ->
-            if (user.name == null) findNavController().navigate(R.id.action_startFragment_to_myAccountFragment)
+        if (user_logged_in != 0 && user_logged_in != "") {
+            FirestoreUtil.getCurrentUser { user ->
+                if (user.name == "") findNavController().navigate(R.id.action_startFragment_to_myAccountFragment)
+            }
         }
 
     }

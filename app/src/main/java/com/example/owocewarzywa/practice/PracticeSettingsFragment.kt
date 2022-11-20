@@ -59,8 +59,11 @@ class PracticeSettingsFragment : Fragment() {
         var topics = ArrayList<String>()
         topics.apply {
             add(resources.getString(R.string.tpc_nat))
-            add(resources.getString(R.string.tpc_lif))
+            add("Dom")
+            add("Inne")
+            add("Zwierzęta")
             add(resources.getString(R.string.tpc_tec))
+            add("Transport")
         }
         val topDataAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, topics)
@@ -95,7 +98,7 @@ class PracticeSettingsFragment : Fragment() {
             "memo" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_memoFragment)
             "fill" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_fillFragment)
             "flashcards" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_flashcardFragment)
-            else -> Toast.makeText(requireContext(), "TODO przechodzenie do ćwiczenia", Toast.LENGTH_SHORT).show()
+            else -> Toast.makeText(requireContext(), "Przechodzenie do ćwiczenia nie powiodło się", Toast.LENGTH_SHORT).show()
         }
     }
 }

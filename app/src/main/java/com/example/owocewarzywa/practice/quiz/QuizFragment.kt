@@ -32,7 +32,11 @@ class QuizFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.quizSubmit.visibility = View.INVISIBLE
         viewLifecycleOwner.lifecycleScope.launch { initQuiz() }
+        quizViewModel.apiStatus.observe(viewLifecycleOwner) {
+            if (it == "Success") binding.quizSubmit.visibility = View.VISIBLE
+        }
         binding.quizSubmit.setOnClickListener { endGame() }
     }
 

@@ -6,18 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentFillBinding
+import com.example.owocewarzywa.model.PracticeViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
 class FillFragment : Fragment() {
 
     private val FillViewModel: FillViewModel by viewModels()
-
+    private val practiceData: PracticeViewModel by activityViewModels()
     private lateinit var binding: FragmentFillBinding
 
     override fun onCreateView(
@@ -35,7 +37,9 @@ class FillFragment : Fragment() {
     }
 
     private suspend fun initView() {
-        FillViewModel.initFill()
+        FillViewModel.initFill(practiceData.language.value.toString(),
+            practiceData.difficulty.value.toString(),
+            practiceData.topic.value.toString())
         onAPISuccess()
     }
 

@@ -59,7 +59,7 @@ class OrderViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
-    private val _logged_in = MutableLiveData<String>()
+    private val _logged_in = MutableLiveData("")
     val logged_in: LiveData<String> = _logged_in
 
 //    val username = null

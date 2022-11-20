@@ -34,10 +34,6 @@ class FillViewModel : ViewModel() {
     private val _answerList = MutableLiveData<ArrayList<String>>()
     val answerList: LiveData<ArrayList<String>> = _answerList
 
-    suspend fun initFill() {
-        getFillData()
-        _apiStatus.value = "Success"
-    }
 
     private fun prepareText() {
         val text: String
@@ -80,14 +76,12 @@ class FillViewModel : ViewModel() {
         _answerList.value = answers
     }
 
-    private suspend fun getFillData() {
-//        viewModelScope.launch {
+    suspend fun initFill(language: String, level: String, category: String) {
         try {
             val listResult =
-                DataApi.retrofitService.getFill("fill-in-blanks", "easy", "english", "technology")
-            Log.e("request value", listResult.toString())
+                DataApi.retrofitService.getFill("fill-in-blanks", level, language, category)
             _apiResponse.value = listResult
-//                _apiStatus.value = "Success"
+            _apiStatus.value = "Success"
             prepareText()
             prepareSpinnerList()
         } catch (e: Exception) {

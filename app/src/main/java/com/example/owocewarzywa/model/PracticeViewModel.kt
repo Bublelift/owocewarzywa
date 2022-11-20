@@ -41,7 +41,10 @@ class PracticeViewModel: ViewModel(){
         }
         _topic.value = when (topic) {
             in listOf("Natura", "Nature")-> "nature"
-            in listOf("Styl życia", "Lifestyle") -> "lifestyle"
+//            in listOf("Styl życia", "Lifestyle") -> "lifestyle"
+            in listOf("Transport", "Transport") -> "transport"
+            in listOf("Zwierzęta", "Animals") -> "animals"
+            in listOf("Inne", "Other") -> "other"
             else -> "technology"
         }
         _difficulty.value = when (difficulty) {
@@ -49,6 +52,5 @@ class PracticeViewModel: ViewModel(){
             in listOf("Trudny", "Hard") -> "hard"
             else -> "hard"
         }
-        Log.e("practice", "lan: $language, top: $topic, dif: $difficulty")
     }
 }

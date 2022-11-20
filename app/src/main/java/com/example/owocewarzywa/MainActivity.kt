@@ -49,35 +49,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      * Handle navigation when the user chooses Up from the action bar.
      */
     override fun onSupportNavigateUp(): Boolean {
-////        val current_fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-//        val current_fragment = navController.currentDestination?.id
-//        Log.i("current_fragment",current_fragment.toString())
-////        if (current_fragment is LoginFragment) { //the fragment on which you want to handle your back press
-//        if (current_fragment == 2131231159) { //the fragment on which you want to handle your back press
-//            Log.e("BACK PRESSED", "BACK PRESSED")
-//        } else {
-//            return navController.navigateUp() || super.onSupportNavigateUp()
-//            //super.onBackPressed()
-//        }
-//        return false
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-//    private fun setNavigationGraph() {
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.startFragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-//
-//        val navGraph = navController.navInflater.inflate(R.navigation.navigation_graph)
-//        navGraph.startDestination =
-//            if (viewModel.isLoggedIn) {
-//                R.id.homeFragment
-//            } else {
-//                R.id.loginFragment
-//            }
-//
-//        navController.graph = navGraph
-//    }
 
 //    override fun onBackPressed() {
 //        val current_fragment = navController.currentDestination?.id
