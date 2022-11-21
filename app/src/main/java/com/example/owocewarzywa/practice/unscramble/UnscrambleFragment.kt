@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentUnscrambleBinding
 import com.example.owocewarzywa.model.PracticeViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 /**
  * Fragment where the game is played, contains the game logic.
@@ -41,15 +43,24 @@ class UnscrambleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.gameViewModel = viewModel
-        binding.maxNoOfWords = MAX_NO_OF_WORDS
+        binding.maxNoOfWords = 10
         binding.lifecycleOwner = viewLifecycleOwner
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-        // Update the UI
+        viewLifecycleOwner.lifecycleScope.launch {initView()}
+
+    }
+
+    private suspend fun initView(){
+        viewModel.initUnscramble(
+            practiceData.language.value.toString(),
+            practiceData.difficulty.value.toString(),
+            practiceData.topic.value.toString()
+        )
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)
         binding.wordCount.text = String.format(
-            "%d z %d słów", viewModel.currentWordCount.value, MAX_NO_OF_WORDS)
+            "%d z %d słów", viewModel.currentWordCount.value, binding.maxNoOfWords)
         updateNextWordOnScreen()
     }
 
@@ -124,7 +135,7 @@ class UnscrambleFragment : Fragment() {
     private fun updateNextWordOnScreen() {
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)
         binding.wordCount.text = String.format(
-            "%d z %d słów", viewModel.currentWordCount.value, MAX_NO_OF_WORDS)
+            "%d z %d słów", viewModel.currentWordCount.value, binding.maxNoOfWords)
         binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord.value
     }
 }

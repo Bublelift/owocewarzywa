@@ -47,8 +47,8 @@ class PracticeSettingsFragment : Fragment() {
     private fun initSpinners() {
         var languages = ArrayList<String>()
         languages.apply {
-            add(resources.getString(R.string.lang_pl))
             add(resources.getString(R.string.lang_en))
+            add(resources.getString(R.string.lang_pl))
             add(resources.getString(R.string.lang_ge))
         }
         val langDataAdapter: ArrayAdapter<String> =
@@ -98,6 +98,7 @@ class PracticeSettingsFragment : Fragment() {
             "memo" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_memoFragment)
             "fill" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_fillFragment)
             "flashcards" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_flashcardFragment)
+            "puzzle" -> findNavController().navigate(R.id.action_practiceSettingsFragment_to_puzzleFragment)
             else -> Toast.makeText(requireContext(), "Przechodzenie do ćwiczenia nie powiodło się", Toast.LENGTH_SHORT).show()
         }
     }

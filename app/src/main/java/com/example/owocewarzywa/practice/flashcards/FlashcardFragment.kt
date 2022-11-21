@@ -1,26 +1,28 @@
 package com.example.owocewarzywa.practice.flashcards
 
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentFlashcardBinding
+import com.example.owocewarzywa.model.PracticeViewModel
 import com.example.owocewarzywa.utils.GlideApp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.coroutines.launch
 
 
 class FlashcardFragment : Fragment() {
 
     private lateinit var binding: FragmentFlashcardBinding
-
+    private val practiceData: PracticeViewModel by activityViewModels()
     private val viewModel: FlashcardViewModel by viewModels()
 
     override fun onCreateView(
@@ -39,11 +41,19 @@ class FlashcardFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-        // Update the UI
+        viewLifecycleOwner.lifecycleScope.launch {initView()}
+    }
+
+    private suspend fun initView() {
+        viewModel.getFlashcardsData(
+            practiceData.difficulty.value.toString(),
+            practiceData.language.value.toString(),
+            practiceData.topic.value.toString()
+        )
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)
         binding.wordCount.text = String.format(
             "%d z %d słów", viewModel.currentWordCount.value, 10)
-        binding.flashcardHint1.text = "Kategoria: "+ viewModel.currentCategory.value
+        binding.flashcardHint1.text = "Podpowiedź: "+ viewModel.currentHint.value
         updateNextWordOnScreen()
     }
 
@@ -135,7 +145,7 @@ class FlashcardFragment : Fragment() {
     private fun updateNextWordOnScreen() {
         viewModel.hints.value = 2
         binding.skip.text = "Podpowiedź (2)"
-        binding.flashcardHint1.text = "Kategoria: " + viewModel.currentCategory.value
+        binding.flashcardHint1.text = "Podpowiedź: " + viewModel.currentHint.value
         binding.flashcardHint1.visibility = View.GONE
         binding.flashcardHint2.visibility = View.GONE
         binding.score.text = String.format("Wynik: %d", viewModel.score.value)

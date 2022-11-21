@@ -16,7 +16,7 @@ class FlashcardViewModel: ViewModel() {
         get() = _score
 
     val hints = MutableLiveData(2)
-    val currentCategory = MutableLiveData<String>()
+    val currentHint = MutableLiveData<String>()
     val currentImage = MutableLiveData<String>()
 
     private val _currentWordCount = MutableLiveData(0)
@@ -46,18 +46,19 @@ class FlashcardViewModel: ViewModel() {
             "Fiszka koks3"),
     )
 
-    init {
-        getNextWord()
-    }
+//    init {
+//        getNextWord()
+//    }
 
 
 
 
     private fun getNextWord() {
-        _currentFlashWord.value = allWordsList[_currentWordCount.value!!].quest
-        currentWord = allWordsList[_currentWordCount.value!!].answer
-        currentCategory.value = allWordsList[_currentWordCount.value!!].category
-        currentImage.value = allWordsList[_currentWordCount.value!!].image
+
+        _currentFlashWord.value = _apiResponse.value!![_currentWordCount.value!!].quest
+        currentWord = _apiResponse.value!![_currentWordCount.value!!].answer
+        currentHint.value = _apiResponse.value!![_currentWordCount.value!!].hint
+        currentImage.value = _apiResponse.value!![_currentWordCount.value!!].image
         _currentWordCount.value = _currentWordCount.value?.inc()
     }
 
@@ -85,7 +86,7 @@ class FlashcardViewModel: ViewModel() {
         when (hints.value) {
             2 -> _score.value = _score.value?.plus(25)
             1 -> _score.value = _score.value?.plus(15)
-            else -> _score.value = _score.value?.plus(10)
+            else -> _score.value = _score.value?.plus(5)
         }
 
     }
@@ -113,13 +114,14 @@ class FlashcardViewModel: ViewModel() {
     }
 
 
-    private suspend fun getFlashcardsData() {
+    suspend fun getFlashcardsData(level: String, language: String, category: String) {
         try {
-            val listResult = DataApi.retrofitService.getFlashcards("flashcards", "easy", "english", "nature")
+            val listResult = DataApi.retrofitService.getFlashcards("flashcards", level, language, category)
             Log.e("Result:", listResult.toString())
-            //_apiResponse.value = listResult
+            _apiResponse.value = listResult
             _apiStatus.value = "Success"
-            allWordsList = listResult
+            //allWordsList = listResult
+            getNextWord()
         } catch (e: Exception) {
             _apiStatus.value = "Error"
         }

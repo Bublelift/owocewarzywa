@@ -50,6 +50,7 @@ class PracticeSelect : Fragment() {
             goSettings()
         }
         binding!!.buttonRiddles.setOnClickListener{
+            practiceData.setPracticeType("puzzle")
             goSettings()
         }
     }

@@ -1,15 +1,15 @@
-package com.example.owocewarzywa.practice.quiz
+package com.example.owocewarzywa.practice.puzzle
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.owocewarzywa.utils.DataApi
 
-class QuizViewModel : ViewModel() {
+class PuzzleViewModel : ViewModel() {
 
     val apiStatus = MutableLiveData<String>()
 
-    private val _apiResponse = MutableLiveData<List<QuizData>>()
+    private val _apiResponse = MutableLiveData<List<PuzzleData>>()
 
     private val _question1 = MutableLiveData<String>()
     val question1: LiveData<String> = _question1
@@ -71,7 +71,7 @@ class QuizViewModel : ViewModel() {
 
     suspend fun initQuiz(level: String, language: String, category: String) {
         try {
-            val listResult = DataApi.retrofitService.getQuiz("quiz", level, language, category)
+            val listResult = DataApi.retrofitService.getPuzzle("puzzles", level, language, category)
             _apiResponse.value = listResult
             prepareQuizData()
             apiStatus.value = "Success"

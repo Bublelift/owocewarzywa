@@ -1,4 +1,4 @@
-package com.example.owocewarzywa.practice.quiz
+package com.example.owocewarzywa.practice.puzzle
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,28 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
-import com.example.owocewarzywa.databinding.FragmentQuizBinding
+import com.example.owocewarzywa.databinding.FragmentPuzzleBinding
 import com.example.owocewarzywa.model.PracticeViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.fragment_quiz.*
 import kotlinx.coroutines.launch
 
-class QuizFragment : Fragment() {
+class PuzzleFragment : Fragment() {
 
-    private lateinit var binding: FragmentQuizBinding
+    private lateinit var binding: FragmentPuzzleBinding
     private val practiceData: PracticeViewModel by activityViewModels()
-    private val quizViewModel: QuizViewModel by activityViewModels()
+    private val quizViewModel: PuzzleViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentQuizBinding.inflate(inflater, container, false)
+        binding = FragmentPuzzleBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -81,5 +79,4 @@ class QuizFragment : Fragment() {
             }
             .show()
     }
-
 }

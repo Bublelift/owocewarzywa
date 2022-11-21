@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class FlashcardData(
     val image: String,
-    val category: String,
-    @Json(name = "TODOenglish") val quest: String,
-    @Json(name = "TODOpolish") val answer: String
+    val hint: String,
+    @Json(name = "name") val quest: String,
+    @Json(name = "answer") val answer: String
 )

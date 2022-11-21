@@ -90,7 +90,7 @@ class StartFragment : Fragment() {
 //        }
 
         // Navigate to the next destination to select the flavor of the cupcakes
-        findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
+        //findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }
 
     /**
@@ -120,5 +120,9 @@ class StartFragment : Fragment() {
 
     fun goPractice() {
         findNavController().navigate(R.id.action_startFragment_to_practiceSelect)
+    }
+
+    fun goFeedback() {
+        findNavController().navigate(R.id.action_startFragment_to_feedbackFragment)
     }
 }

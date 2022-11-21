@@ -42,18 +42,18 @@
 
             <ImageView
                 android:layout_width="380dp"
-                android:layout_height="@dimen/image_size"
+                android:layout_height="270dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
                 android:importantForAccessibility="no"
                 android:scaleType="fitCenter"
+                android:layout_marginTop="6dp"
                 app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginBottom="@dimen/side_margin"
                 android:text="Menu"
                 android:textAppearance="?attr/textAppearanceHeadline4"
@@ -99,6 +99,51 @@
                 android:onClick="@{() -> startFragment.goVoiceCall()}"
                 android:text="Rozmowa video" />
 
+            <Button
+                android:id="@+id/button_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:minWidth="@dimen/order_cupcake_button_width"
+                android:onClick="@{() -> startFragment.goVoiceCall()}"
+                android:text="Ustawienia" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="45dp"
+                android:padding="10dp"
+                android:clipToPadding="false"
+                android:layout_marginBottom="8dp">
+                <!--android:layout_marginEnd="54dp"-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/fab"
+                app:layout_constraintTop_toTopOf="@id/fab"
+                app:layout_constraintBottom_toBottomOf="@id/fab"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="6dp"
+                android:text="Zgłoś błąd\nlub nadużycie"
+                />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/main_blue"
+                    android:onClick="@{() -> startFragment.goFeedback()}"
+                    android:src="@drawable/report_36"
+                    app:tint="@android:color/white"
+                    app:fabCustomSize="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:maxImageSize="28dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

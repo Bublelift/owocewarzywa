@@ -135,4 +135,11 @@ object FirestoreUtil {
         val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
         chatChannelsCollectionRef.document(chatroomId).set(updatedChatChannel(mutableListOf(currentUserId, otherUserId), status))
     }
+
+    fun sendFeedback(feedback: String) {
+        firestoreInstance.collection("feedbacks").add(
+            mapOf("uid" to FirebaseAuth.getInstance().currentUser!!.uid,
+            "feedback" to feedback)
+        )
+    }
 }

@@ -18,13 +18,10 @@ class MemoViewModel : ViewModel() {
     val currentGoal: LiveData<String> = _currentGoal
 
     private val _wordlist = MutableLiveData<List<String>>()
-    //val wordlist: LiveData<List<String>> = _wordlist
 
     private val _currentIdx = MutableLiveData(-1)
-    //val word2: LiveData<String> = _word2
 
     private val _currentTries= MutableLiveData(0)
-//    val word3: LiveData<String> = _word3
 
     private val _score = MutableLiveData(0)
     val score: LiveData<Int> = _score
@@ -32,8 +29,6 @@ class MemoViewModel : ViewModel() {
     private val _cardsList = MutableLiveData<List<MemoData>>()
     val cardsList: LiveData<List<MemoData>> = _cardsList
 
-//    private val _cardsList = MutableLiveData<Map<String, String>>()
-//    val cardsList: LiveData<Map<String, String>> = _cardsList
     private val _backupCardsList: List<MemoData> = listOf(
         MemoData("https://thumbs.dreamstime.com/b/bochenek-bia%C5%82y-chleb-34021408.jpg", "chleb"),
         MemoData("https://www.opengift.pl/plik/6bed7bddcca639affe4a3201068ff1be9e61a576/pilka-nozna-bialyczarny-full.jpg", "piłka"),
@@ -52,28 +47,20 @@ class MemoViewModel : ViewModel() {
             "Success" -> _apiResponse.value!!.shuffled()
             else -> _backupCardsList.shuffled()
         }
-        Log.e("cardlisthhhhh", _cardsList.value.toString())
         var templist = mutableListOf<String>()
         for (card in _cardsList.value!!) {
             templist.add(card.name)
         }
-        Log.e("bfshufl", templist.toString())
         templist = templist.shuffled() as MutableList<String>
-        Log.e("afshufl", templist.toString())
         _wordlist.value = templist.shuffled()
-        Log.e("afshufl2", _wordlist.value.toString())
         tryGetNextGoal()
     }
 
     fun tryGetNextGoal(): Boolean {
         _currentIdx.value = _currentIdx.value!! + 1
         if (_currentIdx.value.toString() == _cardsList.value!!.size.toString()) {
-            Log.e("DZIAŁAJ KURWO DZIAŁAJ", "NO KURWA DZIAŁA W KOŃCU")
             return false
         } else {
-            Log.e("Zjebane gówno 1", _currentIdx.value.toString())
-            Log.e("Zjebane gówno 2", _cardsList.value!!.size.toString())
-            Log.e("Zjebane Gówno w chuj", (_currentIdx.value.toString() == _cardsList.value!!.size.toString()).toString())
             _currentGoal.value = _wordlist.value!![_currentIdx.value!!]
             _currentTries.value = 0
             return true
@@ -100,10 +87,8 @@ class MemoViewModel : ViewModel() {
             val listResult =
                 DataApi.retrofitService.getMemo("memorygame", level, language, category)
             _apiResponse.value = listResult
-//            _apiStatus.value = "Success"
-            _apiStatus.value = "TestDev"
-
-//            prepareSpinnerList()
+            _apiStatus.value = "Success"
+//            _apiStatus.value = "TestDev"
         } catch (e: Exception) {
             _apiStatus.value = "Error"
         }

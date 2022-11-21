@@ -1,15 +1,13 @@
 package com.example.owocewarzywa.chat
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.owocewarzywa.MainActivity
+import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentChatBinding
 import com.example.owocewarzywa.model.ChatViewModel
 import com.example.owocewarzywa.model.TextMessage
@@ -23,6 +21,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.chat_message.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import java.util.*
+
 
 class ChatFragment : Fragment() {
 
@@ -40,10 +39,9 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setHasOptionsMenu(true);
         val fragmentBinding = FragmentChatBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-
         (activity as MainActivity).supportActionBar?.title = chatViewModel.chatUserName.value.toString()
         val otherUserId = chatViewModel.chatUserId.value.toString()
         FirestoreUtil.getOrCreateChatChannel(otherUserId) { channelId ->
@@ -66,7 +64,20 @@ class ChatFragment : Fragment() {
 
     }
 
+    private var itemToShow: MenuItem? = null
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        itemToShow = menu.findItem(R.id.action_copy_id)
+        menu.findItem(R.id.action_copy_id).isVisible = true
+    }
+
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.bar, menu)
+//    }
+
     override fun onDestroyView() {
+        itemToShow!!.isVisible = false
         chatViewModel.resetData()
         shouldInitRecyclerView = true
         super.onDestroyView()
