@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -32,6 +29,7 @@ class MyAccountFragment : Fragment() {
     private var nickname: EditText? = null
     private var bio: EditText? = null
     private var profile_pic: ImageView? = null
+    private var score: TextView? = null
     private val RC_SELECT_IMAGE = 2
     private lateinit var selectedImageBytes: ByteArray
     private var pictureJustChanged = false
@@ -46,6 +44,7 @@ class MyAccountFragment : Fragment() {
             nickname = findViewById<EditText>(R.id.nickname_input)
             bio = findViewById<EditText>(R.id.bio_input)
             profile_pic = findViewById<ImageView>(R.id.profile_pic)
+            score = findViewById(R.id.your_score)
             findViewById<ImageView>(R.id.profile_pic).setOnClickListener {
                 val intent = Intent().apply{
                     type = "image/*"
@@ -107,6 +106,7 @@ class MyAccountFragment : Fragment() {
             if (this@MyAccountFragment.isVisible) {
                 nickname!!.setText(user.name)
                 bio!!.setText(user.bio)
+                score!!.setText(getString(R.string.your_score) + " " +(user.score?.toString() ?: "0"))
                 if (!pictureJustChanged && user.profilePicturePath != null)
                     GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profilePicturePath))

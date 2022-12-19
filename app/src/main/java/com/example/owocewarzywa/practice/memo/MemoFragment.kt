@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentMemoBinding
 import com.example.owocewarzywa.model.PracticeViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
 import com.example.owocewarzywa.utils.GlideApp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -74,7 +75,6 @@ class MemoFragment : Fragment() {
         val index = reverses.indexOf(card)
         card.visibility = View.INVISIBLE
         if (viewModel.currentGoal.value!! == viewModel.cardsList.value!![index].name) {
-            Log.i("good", viewModel.currentGoal.value.toString())
             Timer("Display Reverse back", false).schedule(1500) {
                 requireActivity().runOnUiThread {
                     cards[index].foreground = requireContext().getDrawable(R.drawable.check)
@@ -87,7 +87,6 @@ class MemoFragment : Fragment() {
             }
         }
         else {
-            Log.i("bad", "E")
             Timer("Display Reverse back", false).schedule(1500) {
                 requireActivity().runOnUiThread {
                     cards[index].foreground = requireContext().getDrawable(R.drawable.cross)
@@ -101,7 +100,6 @@ class MemoFragment : Fragment() {
                     cards[index].foreground = null
                     card.visibility = View.VISIBLE
                     binding.barrier.visibility = View.INVISIBLE
-                    Log.i("bad", "end1")
                 }
             }
         }
@@ -132,6 +130,7 @@ class MemoFragment : Fragment() {
             .setMessage(String.format("Wynik: %d", viewModel.score.value))
             .setCancelable(false)
             .setPositiveButton("Menu główne") { _, _ ->
+                FirestoreUtil.updateUserScore(viewModel.score.value!!)
                 findNavController().navigate(R.id.action_memoFragment_to_startFragment)
             }
             .show()

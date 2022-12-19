@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentFlashcardBinding
 import com.example.owocewarzywa.model.PracticeViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
 import com.example.owocewarzywa.utils.GlideApp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -115,6 +116,7 @@ class FlashcardFragment : Fragment() {
             .setMessage(String.format("Wynik: %d", viewModel.score.value))
             .setCancelable(false)
             .setPositiveButton("Menu główne") { _, _ ->
+                FirestoreUtil.updateUserScore(viewModel.score.value!!)
                 goMenu()
             }
             .show()

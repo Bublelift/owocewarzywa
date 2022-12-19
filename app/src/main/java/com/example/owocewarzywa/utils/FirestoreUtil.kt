@@ -40,7 +40,8 @@ object FirestoreUtil {
                 val newUser = User(
                     name = FirebaseAuth.getInstance().currentUser?.displayName ?: "",
                     bio = "",
-                    profilePicturePath = null
+                    profilePicturePath = null,
+                    score = 0L
                 )
                 currentUserDocRef.set(newUser).addOnSuccessListener { onComplete() }
             } else onComplete()
@@ -123,17 +124,18 @@ object FirestoreUtil {
         var toReadBy: String? = null
         chatChannelsCollectionRef.document(chatroomId).get()
             .addOnSuccessListener { if (it.exists()) {
-                    toReadBy = it["toReadBy"].toString()
+                    toReadBy = it["status"].toString()
                 }
                 if (toReadBy == null || toReadBy!!.isBlank())
                     onSuccess("")
-                else onSuccess(toReadBy.toString())
+                else onSuccess(toReadBy!!)
             }
     }
 
-    fun setMsgReadStatus(chatroomId: String, otherUserId: String, status: String) {
+    fun setMsgReadStatus(chatroomId: String, status: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
-        chatChannelsCollectionRef.document(chatroomId).set(updatedChatChannel(mutableListOf(currentUserId, otherUserId), status))
+        chatChannelsCollectionRef.document(chatroomId).update("status", status)
+//        chatChannelsCollectionRef.document(chatroomId).set(updatedChatChannel(mutableListOf(currentUserId, otherUserId), status))
     }
 
     fun sendFeedback(feedback: String) {
@@ -141,5 +143,12 @@ object FirestoreUtil {
             mapOf("uid" to FirebaseAuth.getInstance().currentUser!!.uid,
             "feedback" to feedback)
         )
+    }
+
+    fun updateUserScore(score: Int) {
+        currentUserDocRef.get().addOnSuccessListener {
+            val current_score = ((it.data?.get("score") as Long?)?.toInt() ?: 0) + score
+            currentUserDocRef.update("score", current_score)
+        }
     }
 }

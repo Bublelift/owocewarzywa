@@ -75,6 +75,29 @@
             android:src="@drawable/ic_baseline_photo_camera_24" />
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/your_score"
+        app:layout_constraintTop_toBottomOf="@id/card_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:text="@string/your_score"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score_label"
+        app:layout_constraintTop_toBottomOf="@id/your_score"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/score_info"
+        />
+
     <Button
         android:id="@+id/save"
         android:layout_width="363dp"
@@ -83,7 +106,7 @@
         android:text="Zapisz zmiany"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_view" />
+        app:layout_constraintTop_toBottomOf="@+id/score_label" />
 
     <Button
         android:id="@+id/signout"

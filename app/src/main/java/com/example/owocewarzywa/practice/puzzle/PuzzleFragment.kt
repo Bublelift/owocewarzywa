@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentPuzzleBinding
 import com.example.owocewarzywa.model.PracticeViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -75,7 +76,8 @@ class PuzzleFragment : Fragment() {
             .setMessage(String.format("Wynik: %d", score))
             .setCancelable(false)
             .setPositiveButton("Menu główne") { _, _ ->
-                findNavController().navigate(R.id.action_quizFragment_to_startFragment)
+                FirestoreUtil.updateUserScore(score)
+                findNavController().navigate(R.id.action_puzzleFragment_to_startFragment)
             }
             .show()
     }

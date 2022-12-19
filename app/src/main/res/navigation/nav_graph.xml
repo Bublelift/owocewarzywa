@@ -38,31 +38,9 @@
         <action
             android:id="@+id/action_startFragment_to_feedbackFragment"
             app:destination="@id/feedbackFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/pickupFragment"
-        android:name="com.example.owocewarzywa.PickupFragment"
-        android:label="@string/choose_pickup_date"
-        tools:layout="@layout/fragment_pickup">
         <action
-            android:id="@+id/action_pickupFragment_to_summaryFragment"
-            app:destination="@id/summaryFragment" />
-        <action
-            android:id="@+id/action_pickupFragment_to_startFragment"
-            app:destination="@id/startFragment"
-            app:popUpTo="@id/startFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/summaryFragment"
-        android:name="com.example.owocewarzywa.SummaryFragment"
-        android:label="@string/order_summary"
-        tools:layout="@layout/fragment_summary">
-        <action
-            android:id="@+id/action_summaryFragment_to_startFragment"
-            app:destination="@id/startFragment"
-            app:popUpTo="@id/startFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_startFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -211,4 +189,9 @@
         android:name="com.example.owocewarzywa.FeedbackFragment"
         android:label="fragment_feedback"
         tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.owocewarzywa.SettingsFragment"
+        android:label="Ustawienia aplikacji"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

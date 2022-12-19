@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.databinding.FragmentFillBinding
 import com.example.owocewarzywa.model.PracticeViewModel
+import com.example.owocewarzywa.utils.FirestoreUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -59,11 +60,13 @@ class FillFragment : Fragment() {
     }
 
     private fun endGame() {
+        val score = getScore()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Gratulacje!")
-            .setMessage(String.format("Wynik: %d", getScore()))
+            .setMessage(String.format("Wynik: %d", score))
             .setCancelable(false)
             .setPositiveButton("Menu główne") { _, _ ->
+                FirestoreUtil.updateUserScore(score)
                 findNavController().navigate(R.id.action_fillFragment_to_startFragment)
             }
             .show()

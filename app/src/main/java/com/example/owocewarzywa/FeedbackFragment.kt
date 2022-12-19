@@ -32,7 +32,7 @@ class FeedbackFragment : Fragment() {
         binding.nextButton.setOnClickListener{
             sendFeedback()
         }
-        if (chatViewModel.chatUserId.value != null) {
+        if (chatViewModel.chatUserId.value != null && chatViewModel.chatUserId.value != "") {
             binding.feedback.setText("Zgłoszenie użytkownika " +
                     "${chatViewModel.chatUserName.value} (${chatViewModel.chatUserId.value}):\n")
         }

@@ -106,7 +106,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.goVoiceCall()}"
+                android:onClick="@{() -> startFragment.goSettings()}"
                 android:text="Ustawienia" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -18,6 +18,7 @@ class PersonItem(val person: User, val userId: String, private val context: Cont
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.user_nickname.text = person.name
         viewHolder.user_bio.text = person.bio
+        viewHolder.user_score.text = context.getString(R.string.score) + " " + (person.score?.toString() ?: "0")
         if (person.profilePicturePath != null && person.profilePicturePath != "") {
             GlideApp.with(context).load(StorageUtil.pathToReference(person.profilePicturePath))
                 .placeholder(R.drawable.no_profile)
@@ -30,7 +31,7 @@ class PersonItem(val person: User, val userId: String, private val context: Cont
         }
 //        var chatChannel: String? = null
         FirestoreUtil.getOrCreateChatChannel(userId) { channelId ->
-            val toReadBy = FirestoreUtil.getMsgReadStatus(channelId) {toReadBy ->
+            FirestoreUtil.getMsgReadStatus(channelId) {toReadBy ->
                 if (toReadBy == FirebaseAuth.getInstance().currentUser!!.uid) {
                     viewHolder.new_msg.visibility = android.view.View.VISIBLE
                     viewHolder.user_nickname.setTextColor(Color.parseColor("#000000"))

@@ -67,7 +67,7 @@ class SummaryFragment : Fragment() {
         val numberOfCupcakes = sharedViewModel.quantity.value ?: 0
         val orderSummary = getString(
             R.string.order_details,
-            resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
+            resources.getQuantityString(R.string.lang_pl, numberOfCupcakes, numberOfCupcakes),
             sharedViewModel.flavor.value.toString(),
             sharedViewModel.date.value.toString(),
             sharedViewModel.price.value.toString()
@@ -95,7 +95,7 @@ class SummaryFragment : Fragment() {
         sharedViewModel.resetOrder()
 
         // Navigate back to the [StartFragment] to start over
-        findNavController().navigate(R.id.action_summaryFragment_to_startFragment)
+//        findNavController().navigate(R.id.action_summaryFragment_to_startFragment)
     }
 
     /**

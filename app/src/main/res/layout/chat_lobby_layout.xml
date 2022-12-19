@@ -4,35 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="16dp"
-    android:gravity="center"
     android:layout_height="match_parent"
     tools:context=".webrtc.LobbyActivity">
+
     <ImageView
         android:id="@+id/image"
-        android:src="@drawable/webrtc"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
         android:layout_marginBottom="16dp"
-        android:layout_centerInParent="true"
-        android:layout_width="200dp"
-        android:layout_height="200dp"/>
+        android:src="@drawable/logo" />
+
     <com.google.android.material.card.MaterialCardView
         android:layout_below="@+id/image"
         android:layout_width="match_parent"
         app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/teal_700"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/main_blue"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
+            android:padding="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_margin="16dp"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:text="Kotlin Sample"
-                android:elevation="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
             <EditText
                 android:padding="16dp"
                 android:layout_margin="16dp"
@@ -75,4 +71,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:elevation="8dp"
+        android:text="@string/video_chat_label"
+        android:textColor="@color/grey_400" />
 </RelativeLayout>

@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
+import androidx.core.view.marginLeft
 import com.example.owocewarzywa.R
 import com.example.owocewarzywa.model.TextMessage
 import com.google.firebase.auth.FirebaseAuth
@@ -21,7 +23,7 @@ class TextMessageItem(val message: TextMessage, val context: Context) : Item() {
     }
 
     private fun setTimeText(viewHolder: ViewHolder) {
-        val dateFormat = SimpleDateFormat("HH:mm, dd.MMMM")
+        val dateFormat = SimpleDateFormat("HH:mm, dd/MM")
             //.getDateInstance(SimpleDateFormat., Locale.forLanguageTag("PL"))
         viewHolder.message_time.text = dateFormat.format(message.time)
     }
@@ -51,6 +53,14 @@ class TextMessageItem(val message: TextMessage, val context: Context) : Item() {
             }
             viewHolder.message_time.apply{
                 setTextColor(resources.getColor(R.color.grey_700))
+                val new_params = RelativeLayout.LayoutParams(layoutParams)
+                new_params.addRule(RelativeLayout.ALIGN_LEFT, R.id.message_text)
+                new_params.addRule(RelativeLayout.BELOW, R.id.message_text)
+                new_params.leftMargin = 32
+                this.layoutParams = new_params
+//                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) this.getLayoutParams()
+//                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE)
+//                layoutParams = layoutParams.
             }
         }
     }

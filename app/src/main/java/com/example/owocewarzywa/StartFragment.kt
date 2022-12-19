@@ -57,7 +57,6 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding?.startFragment = this
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
@@ -124,5 +123,9 @@ class StartFragment : Fragment() {
 
     fun goFeedback() {
         findNavController().navigate(R.id.action_startFragment_to_feedbackFragment)
+    }
+
+    fun goSettings() {
+        findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
     }
 }
